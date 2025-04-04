@@ -1,0 +1,14 @@
+Write me a prompt to make a new fully functional website using vite react with tailwindcss. also it cant use typescript at all and must use react route. no need for any backend yet. the website would be for hiring limos. use https://dclimosedans.com/ and https://pitdrives.com/ websites for reference. the website has to be responsive. also make the design slick and have lots of effects. the pages that i need are-
+
+
+Home.jsx - 	A welcoming landing page with a hero section(with a button for 			reserving now) and call-to-action
+
+
+About.jsx - Company information and story
+Services.jsx - Grid layout showcasing different services
+Reservation.jsx - A comprehensive booking form
+Fleet.jsx - Display of available vehicles
+Airports.jsx - Airport service information
+Blog.jsx - Blog post listing
+Videos.jsx - Video gallery
+NotFound.jsx - 404 error page
