@@ -2,7 +2,110 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaUsers, FaSnowflake, FaWifi, FaGlassCheers, FaStar, FaCheck } from 'react-icons/fa';
 
+
+
 const Fleet = () => {
+
+const topFleet = [
+  {
+    name: "Mercedes S600 Limo",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 6,
+    luggage: 4,
+    hourlyRate: "$120/hour",
+  },
+  {
+    name: "BMW 7 Series Executive",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 5,
+    luggage: 3,
+    hourlyRate: "$110/hour",
+  },
+  {
+    name: "Cadillac Escalade Limousine",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 8,
+    luggage: 6,
+    hourlyRate: "$150/hour",
+  },
+  {
+    name: "Lincoln Navigator Limo",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 7,
+    luggage: 5,
+    hourlyRate: "$140/hour",
+  },
+  {
+    name: "Hummer Limousine",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 10,
+    luggage: 8,
+    hourlyRate: "$160/hour",
+  },
+  {
+    name: "Chrysler 300 Limo",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
+    passenger: 6,
+    luggage: 4,
+    hourlyRate: "$130/hour",
+  },
+  {
+    name: "Audi A8 Limousine",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 5,
+    luggage: 3,
+    hourlyRate: "$125/hour",
+  },
+  {
+    name: "Rolls Royce Phantom",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 4,
+    luggage: 2,
+    hourlyRate: "$250/hour",
+  },
+  {
+    name: "Bentley Mulsanne Limo",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 4,
+    luggage: 2,
+    hourlyRate: "$240/hour",
+  },
+  {
+    name: "Lexus LS Limousine",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 5,
+    luggage: 3,
+    hourlyRate: "$115/hour",
+  },
+  {
+    name: "Jaguar XJ Limousine",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 4,
+    luggage: 2,
+    hourlyRate: "$135/hour",
+  },
+  {
+    name: "Tesla Model S Limo",
+    imageUrl:
+      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    passenger: 5,
+    luggage: 3,
+    hourlyRate: "$180/hour",
+  },
+];
+
   // Vehicle data
   const vehicles = [
     {

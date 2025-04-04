@@ -1,6 +1,93 @@
 import React from 'react';
 import { FaPlane, FaBriefcase, FaGlassCheers, FaGraduationCap, FaCalendarAlt, FaCarAlt, FaStar, FaPhoneAlt, FaCheck } from 'react-icons/fa';
 
+const ServiceData = [
+  {
+    name: "Airport Transfers",
+    description:
+      "Enjoy seamless airport transport with our luxury fleet. Professional chauffeurs track flights in real-time for timely pickups. Relax with spacious luggage capacity, plush leather seats, and complimentary bottled water.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1616620418290-81a162f05e5d?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    features: [
+      "Flight tracking for delayed arrivals",
+      "Meet & greet with name signage",
+      "Disinfectant wipes & sanitizer provided",
+      "24/7 availability including holidays",
+    ],
+    to: "/services",
+  },
+  {
+    name: "Corporate Travel",
+    description:
+      "Impress clients with our discreet, professional chauffeur service. Our executive vehicles feature privacy partitions, onboard Wi-Fi, and power outlets for productivity. Perfect for client meetings, corporate events, or daily commutes in the DC metro area.",
+    imageUrl:
+      "https://plus.unsplash.com/premium_photo-1661397005386-5f35bae9f35a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    features: [
+      "Black luxury sedans & SUVs",
+      "Documented safety records",
+      "Same-day booking available",
+      "Monthly billing options",
+    ],
+    to: "/services",
+  },
+  {
+    name: "Wedding Transportation",
+    description:
+      "Make your wedding day flawless with our bridal fleet. From classic stretch limousines to vintage Rolls Royce options, we provide red carpet service, complimentary decorations, and experienced chauffeurs who understand wedding timelines.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80",
+    features: [
+      "Bridal party coordination",
+      "Champagne toast service",
+      "Emergency wedding day kit",
+      "Flexible hourly packages",
+    ],
+    to: "/services",
+  },
+  {
+    name: "Special Event Limousines",
+    description:
+      "Elevate your prom, anniversary, or milestone celebration with our luxury party buses and limousines. Featuring premium sound systems, LED lighting, and spacious interiors designed for group celebrations in the DC area.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
+    features: [
+      "Non-alcoholic beverage bar",
+      "Social media photo lighting",
+      "Overnight packages available",
+      "20+ passenger options",
+    ],
+    to: "/services",
+  },
+  {
+    name: "Wine Country Tours",
+    description:
+      "Discover Virginia's finest vineyards in luxury. Our wine tour packages include custom itineraries, knowledgeable chauffeurs, and climate-controlled vehicles perfect for transporting your purchases safely back to DC.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
+    features: [
+      "Vineyard recommendations",
+      "Cooler storage for purchases",
+      "Flexible pickup locations",
+      "Private group tours",
+    ],
+    to: "/services",
+  },
+  {
+    name: "Nightlife Transportation",
+    description:
+      "Enjoy DC's vibrant nightlife safely with our premium party transportation. Our chauffeurs know all the best routes to avoid traffic and get your group to clubs, concerts, and events on time with VIP treatment.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
+    features: [
+      "Late-night availability",
+      "Designated driver service",
+      "Phone chargers provided",
+      "Multiple stop itineraries",
+    ],
+    to: "/services",
+  },
+];
+
 const Services = () => {
   return (
     <div className="bg-gray-50">

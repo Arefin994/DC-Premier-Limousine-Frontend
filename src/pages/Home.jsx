@@ -48,48 +48,6 @@ const ServiceData = [
     ],
     to: "/services",
   },
-  {
-    name: "Special Event Limousines",
-    description:
-      "Elevate your prom, anniversary, or milestone celebration with our luxury party buses and limousines. Featuring premium sound systems, LED lighting, and spacious interiors designed for group celebrations in the DC area.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-    features: [
-      "Non-alcoholic beverage bar",
-      "Social media photo lighting",
-      "Overnight packages available",
-      "20+ passenger options",
-    ],
-    to: "/services",
-  },
-  {
-    name: "Wine Country Tours",
-    description:
-      "Discover Virginia's finest vineyards in luxury. Our wine tour packages include custom itineraries, knowledgeable chauffeurs, and climate-controlled vehicles perfect for transporting your purchases safely back to DC.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-    features: [
-      "Vineyard recommendations",
-      "Cooler storage for purchases",
-      "Flexible pickup locations",
-      "Private group tours",
-    ],
-    to: "/services",
-  },
-  {
-    name: "Nightlife Transportation",
-    description:
-      "Enjoy DC's vibrant nightlife safely with our premium party transportation. Our chauffeurs know all the best routes to avoid traffic and get your group to clubs, concerts, and events on time with VIP treatment.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-    features: [
-      "Late-night availability",
-      "Designated driver service",
-      "Phone chargers provided",
-      "Multiple stop itineraries",
-    ],
-    to: "/services",
-  },
 ];
 
 const topFleet = [
@@ -116,79 +74,6 @@ const topFleet = [
     passenger: 8,
     luggage: 6,
     hourlyRate: "$150/hour",
-  },
-  {
-    name: "Lincoln Navigator Limo",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 7,
-    luggage: 5,
-    hourlyRate: "$140/hour",
-  },
-  {
-    name: "Hummer Limousine",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 10,
-    luggage: 8,
-    hourlyRate: "$160/hour",
-  },
-  {
-    name: "Chrysler 300 Limo",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-    passenger: 6,
-    luggage: 4,
-    hourlyRate: "$130/hour",
-  },
-  {
-    name: "Audi A8 Limousine",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 5,
-    luggage: 3,
-    hourlyRate: "$125/hour",
-  },
-  {
-    name: "Rolls Royce Phantom",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 4,
-    luggage: 2,
-    hourlyRate: "$250/hour",
-  },
-  {
-    name: "Bentley Mulsanne Limo",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 4,
-    luggage: 2,
-    hourlyRate: "$240/hour",
-  },
-  {
-    name: "Lexus LS Limousine",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 5,
-    luggage: 3,
-    hourlyRate: "$115/hour",
-  },
-  {
-    name: "Jaguar XJ Limousine",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 4,
-    luggage: 2,
-    hourlyRate: "$135/hour",
-  },
-  {
-    name: "Tesla Model S Limo",
-    imageUrl:
-      "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    passenger: 5,
-    luggage: 3,
-    hourlyRate: "$180/hour",
   },
 ];
 
