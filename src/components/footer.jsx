@@ -24,7 +24,9 @@ const Footer = () => {
               <span className="text-xl font-bold">DC Premier Limousine</span>
             </div>
             <p className="text-gray-400 mb-4">
-              Your premier luxury transportation service in Washington DC. Experience elegance, comfort, and reliability with our fleet of premium vehicles and professional chauffeurs.
+              Your premier luxury transportation service in Washington DC.
+              Experience elegance, comfort, and reliability with our fleet of
+              premium vehicles and professional chauffeurs.
             </p>
             <div className="flex space-x-4">
               <a

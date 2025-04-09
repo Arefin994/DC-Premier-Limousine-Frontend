@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import { HeroSection } from "./Carousel";
 import {
@@ -29,28 +30,28 @@ export const Hero = () => {
     <div>
       <HeroSection />
       <div className="max-w-screen-2xl mx-auto absolute inset-0 z-10 flex flex-col items-start justify-center text-left text-white">
-        <h1 className="text-4xl font-bold md:text-6xl lg:text-7xl">
+        <h1 className="ml-2 text-4xl font-bold md:text-6xl lg:text-7xl text-[#FFD700]">
           Love me like a sailor
         </h1>
-        <p className="mt-4 mb-4 max-w-2xl text-lg md:text-xl">
+        <p className="ml-2 mb-4 max-w-2xl text-lg md:text-xl">
           Beautiful description that overlays the carousel
         </p>
-        <motion.button
-          style={{
-            border,
-            boxShadow,
-          }}
-          whileHover={{
-            scale: 1.25,
-          }}
+        <Link to="/Reservation">
+          <motion.button
+            style={{
+              border,
+              boxShadow,
+            }}
           whileTap={{
             scale: 0.985,
           }}
-          className="group relative flex w-fit items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-950/50 hover:scale-125"
+          className="ml-3 group relative flex w-fit items-center gap-1.5 rounded-full bg-black 
+          px-4 py-2 text-lg text-gray-50 transition-all duration-300 hover:scale-125"
         >
           Book Now
-          <FiArrowRight className="transition-transform group-hover:-rotate-45 group-active:-rotate-12" />
-        </motion.button>
+            <FiArrowRight className="transition-transform group-hover:text-2xl group-hover:-rotate-45 group-active:-rotate-12" />
+          </motion.button>
+        </Link>
       </div>
     </div>
   );
