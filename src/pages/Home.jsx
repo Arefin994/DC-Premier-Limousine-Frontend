@@ -2,7 +2,7 @@ import React from "react";
 import { Hero } from "../components/hero";
 import { motion } from "framer-motion";
 import Card from "../components/Card";
-import ProfileCard from "../components/Car_Card";
+import Car_Card from "../components/Car_Card";
 import { Link } from "react-router-dom";
 
 const ServiceData = [
@@ -197,7 +197,14 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <ProfileCard {...card} />
+                <Car_Card 
+                  name={card.name}
+                  imageUrl={card.imageUrl}
+                  passenger={card.passenger}
+                  luggage={card.luggage}
+                  hourlyRate={card.hourlyRate}
+                  flag={true}
+                />
               </motion.div>
             ))}
           </div>
