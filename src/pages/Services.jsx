@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import CancellationPolicy from '../components/cancellation';
+import { Helmet } from 'react-helmet-async';
 
 const ServiceData = [
   {
@@ -94,254 +95,259 @@ const ServiceData = [
 
 const Services = () => {
   return (
-    <div className="bg-[#1A1A1A]">
-      {/* Hero Section with Parallax */}
-      <div className="relative h-[100vh] overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0.5 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-            filter: "brightness(0.7)",
-          }}
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <div className="text-center text-white p-8 max-w-4xl">
-            <motion.h1
-              className="text-4xl md:text-6xl font-bold mb-6 text-[#FFD700]"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              Premium Limo Services in Washington, DC
-            </motion.h1>
-            <motion.p
-              className="text-xl md:text-2xl mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Luxury transportation tailored for every occasion
-            </motion.p>
-            <Link to="/reservation">
-              <motion.button
-                className="px-8 py-3 bg-[#FFD700] text-black font-bold rounded-lg hover:bg-[#FFE657] transition"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+    <>
+      <Helmet>
+        <title>Our Services - DC Premier Limo</title>
+        <meta name="description" content="Explore our premium limo services, including airport transfers, corporate travel, wedding transportation, and more." />
+        <meta name="keywords" content="limo services, airport transfers, corporate travel, wedding transportation, luxury limo" />
+      </Helmet>
+      <main className="bg-[#1A1A1A]">
+        <header className="relative h-[100vh] overflow-hidden">
+          <motion.div
+            className="absolute inset-0"
+            initial={{ opacity: 0.5 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundAttachment: "fixed",
+              filter: "brightness(0.7)",
+            }}
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div className="text-center text-white p-8 max-w-4xl">
+              <motion.h1
+                className="text-4xl md:text-6xl font-bold mb-6 text-[#FFD700]"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
               >
-                Book Your Ride Now
-              </motion.button>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Services Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <motion.h2 
-          className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          Our Services
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {ServiceData.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card
-                name={service.name}
-                description={service.description}
-                features={service.features}
-                imageUrl={service.imageUrl}
-                to={service.to}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Benefits Section with Parallax */}
-      <div className="relative h-[100vh] overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0.5 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-            filter: "brightness(0.7)",
-          }}
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-            <motion.h2 
-              className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Why Choose DC Premier Limousine?
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-              {[
-                { text: "Professional Licensed Chauffeurs" },
-                { text: "24/7 Customer Support" },
-                { text: "Flight Tracking for Airport Pickups" },
-                { text: "Competitive Pricing with No Hidden Fees" },
-                { text: "Luxury Well-Maintained Vehicles" },
-                { text: "Meet & Greet Service Available" },
-                { text: "Punctual & Reliable Service" },
-                { text: "Easy Online Booking" }
-              ].map((benefit, index) => (
-                <motion.div 
-                  key={index}
-                  className="flex items-start bg-[#1A1A1A] bg-opacity-80 p-4 rounded-lg text-xl"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                Premium Limo Services in Washington, DC
+              </motion.h1>
+              <motion.p
+                className="text-xl md:text-2xl mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                Luxury transportation tailored for every occasion
+              </motion.p>
+              <Link to="/reservation">
+                <motion.button
+                  className="px-8 py-3 bg-[#FFD700] text-black font-bold rounded-lg hover:bg-[#FFE657] transition"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <FaCheck className="text-[#FFD700] mt-1 mr-2" />
-                  <p className="text-white">{benefit.text}</p>
-                </motion.div>
-              ))}
+                  Book Your Ride Now
+                </motion.button>
+              </Link>
             </div>
           </div>
-        </div>
-      </div>
+        </header>
 
-      <CancellationPolicy/>
-
-      {/* Testimonials */}
-      <div className="relative h-[100vh] overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0.5 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-            filter: "brightness(0.7)",
-          }}
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.h2 
-              className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Client Testimonials
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  quote: "The airport pickup was flawless. The driver was waiting when we landed and helped with all our luggage.",
-                  author: "Michael T.",
-                  rating: 5
-                },
-                {
-                  quote: "Perfect service for our wedding day. The limo arrived on time and was beautifully decorated.",
-                  author: "Sarah K.",
-                  rating: 5
-                },
-                {
-                  quote: "Corporate clients were impressed with our transportation. Will definitely use again for business events.",
-                  author: "James L.",
-                  rating: 5
-                }
-              ].map((testimonial, index) => (
-                <motion.div 
-                  key={index}
-                  className="bg-[#1A1A1A]/80 p-6 rounded-lg border border-[#626262]"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <FaStar key={i} className="text-[#FFD700]" />
-                    ))}
-                  </div>
-                  <p className="text-[#AAAAAA] italic mb-4">"{testimonial.quote}"</p>
-                  <p className="font-semibold text-[#FFD700]">- {testimonial.author}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="bg-[#FFD700] py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <motion.h2 
-            className="text-3xl font-bold mb-6 text-black"
+            className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            Ready to Experience Luxury Transportation?
+            Our Services
           </motion.h2>
-          <motion.p 
-            className="text-xl mb-8 max-w-3xl mx-auto text-black"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Contact us today to book your ride or get a free quote
-          </motion.p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link to="/reservation">
-              <motion.button 
-                className="bg-black hover:bg-[#1A1A1A] text-[#FFD700] font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {ServiceData.map((service, index) => (
+              <motion.article
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
               >
-                <FaCalendarAlt className="mr-2" /> Book Online
-              </motion.button>
-            </Link>
-            <a href="tel:5551234567">
-              <motion.button 
-                className="bg-black hover:bg-[#1A1A1A] text-[#FFD700] font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FaPhoneAlt className="mr-2" /> (555) 123-4567
-              </motion.button>
-            </a>
+                <Card
+                  name={service.name}
+                  description={service.description}
+                  features={service.features}
+                  imageUrl={service.imageUrl}
+                  to={service.to}
+                />
+              </motion.article>
+            ))}
           </div>
-        </div>
-      </div>
-    </div>
+        </section>
+
+        {/* Benefits Section with Parallax */}
+        <section className="relative h-[100vh] overflow-hidden">
+          <motion.div
+            className="absolute inset-0"
+            initial={{ opacity: 0.5 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundAttachment: "fixed",
+              filter: "brightness(0.7)",
+            }}
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+              <motion.h2 
+                className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                Why Choose DC Premier Limousine?
+              </motion.h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                {[
+                  { text: "Professional Licensed Chauffeurs" },
+                  { text: "24/7 Customer Support" },
+                  { text: "Flight Tracking for Airport Pickups" },
+                  { text: "Competitive Pricing with No Hidden Fees" },
+                  { text: "Luxury Well-Maintained Vehicles" },
+                  { text: "Meet & Greet Service Available" },
+                  { text: "Punctual & Reliable Service" },
+                  { text: "Easy Online Booking" }
+                ].map((benefit, index) => (
+                  <motion.div 
+                    key={index}
+                    className="flex items-start bg-[#1A1A1A] bg-opacity-80 p-4 rounded-lg text-xl"
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <FaCheck className="text-[#FFD700] mt-1 mr-2" />
+                    <p className="text-white">{benefit.text}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <CancellationPolicy/>
+
+        {/* Testimonials */}
+        <section className="relative h-[100vh] overflow-hidden">
+          <motion.div
+            className="absolute inset-0"
+            initial={{ opacity: 0.5 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundAttachment: "fixed",
+              filter: "brightness(0.7)",
+            }}
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.h2 
+                className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                Client Testimonials
+              </motion.h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  {
+                    quote: "The airport pickup was flawless. The driver was waiting when we landed and helped with all our luggage.",
+                    author: "Michael T.",
+                    rating: 5
+                  },
+                  {
+                    quote: "Perfect service for our wedding day. The limo arrived on time and was beautifully decorated.",
+                    author: "Sarah K.",
+                    rating: 5
+                  },
+                  {
+                    quote: "Corporate clients were impressed with our transportation. Will definitely use again for business events.",
+                    author: "James L.",
+                    rating: 5
+                  }
+                ].map((testimonial, index) => (
+                  <motion.article 
+                    key={index}
+                    className="bg-[#1A1A1A]/80 p-6 rounded-lg border border-[#626262]"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <FaStar key={i} className="text-[#FFD700]" />
+                      ))}
+                    </div>
+                    <p className="text-[#AAAAAA] italic mb-4">"{testimonial.quote}"</p>
+                    <p className="font-semibold text-[#FFD700]">- {testimonial.author}</p>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="bg-[#FFD700] py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2 
+              className="text-3xl font-bold mb-6 text-black"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              Ready to Experience Luxury Transportation?
+            </motion.h2>
+            <motion.p 
+              className="text-xl mb-8 max-w-3xl mx-auto text-black"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Contact us today to book your ride or get a free quote
+            </motion.p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/reservation">
+                <motion.button 
+                  className="bg-black hover:bg-[#1A1A1A] text-[#FFD700] font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center justify-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaCalendarAlt className="mr-2" /> Book Online
+                </motion.button>
+              </Link>
+              <a href="tel:5551234567">
+                <motion.button 
+                  className="bg-black hover:bg-[#1A1A1A] text-[#FFD700] font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center justify-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaPhoneAlt className="mr-2" /> (555) 123-4567
+                </motion.button>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 

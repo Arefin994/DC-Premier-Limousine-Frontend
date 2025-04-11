@@ -30,11 +30,11 @@ export const Hero = () => {
     <div>
       <HeroSection />
       <div className="max-w-screen-2xl mx-auto absolute inset-0 z-10 flex flex-col items-start justify-center text-left text-white">
-        <h1 className="ml-2 text-4xl font-bold md:text-6xl lg:text-7xl text-[#FFD700]">
-          Love me like a sailor
+        <h1 className="ml-2 text-3xl font-bold md:text-5xl lg:text-6xl text-[#FFD700] leading-tight">
+          Discover the Ultimate Luxury Limousine Experience
         </h1>
         <p className="ml-2 mb-4 max-w-2xl text-lg md:text-xl">
-          Beautiful description that overlays the carousel
+        Experience Luxury, Comfort, and Style
         </p>
         <Link to="/Reservation">
           <motion.button

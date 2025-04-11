@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const imgs = [
-    "/1.png",
-    "/2.png",
-    "/3.png",
-    "/4.png",
-    "/5.png",
-    "/6.png",
-    "/7.png",
+    "/11.webp",
+    "/22.webp",
+    "/33.webp",
+    "/55.webp",
 ];
 
 const AUTO_DELAY = 5000; // 5 seconds
@@ -23,10 +21,16 @@ const SPRING_OPTIONS = {
 
 export const HeroSection = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* Full-screen Carousel Background */}
-      <SwipeCarousel />
-    </section>
+    <>
+      <Helmet>
+        <title>DC Premier Limousine - Luxury Rides</title>
+        <meta name="description" content="Discover premium limousine services with DC Premier Limousine." />
+      </Helmet>
+      <section className="relative h-screen w-full overflow-hidden">
+        {/* Full-screen Carousel Background */}
+        <SwipeCarousel />
+      </section>
+    </>
   );
 };
 
