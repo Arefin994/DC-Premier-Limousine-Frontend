@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HelmetProvider } from 'react-helmet-async';
+import LoadingState from './components/LoadingState';
 
 // ScrollToTop component
 function ScrollToTop() {
@@ -30,41 +31,43 @@ function ScrollToTop() {
 function App() {
   return (
     <HelmetProvider>
-      <Router>
-        <div className="min-h-screen flex flex-col">
-          <header>
-            <Navbar />
-          </header>
-          <main className="flex-grow">
-            <ScrollToTop />
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/reservation" element={<Reservation />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/fleet" element={<Fleet />} />
-              <Route path="/airports" element={<AirportServices />} />
-              <Route path="/videos" element={<Videos />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <footer>
-            <Footer />
-          </footer>
-        </div>
-      </Router>
+      <LoadingState>
+        <Router>
+          <div className="min-h-screen flex flex-col">
+            <header>
+              <Navbar />
+            </header>
+            <main className="flex-grow">
+              <ScrollToTop />
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/reservation" element={<Reservation />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/fleet" element={<Fleet />} />
+                <Route path="/airports" element={<AirportServices />} />
+                <Route path="/videos" element={<Videos />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <footer>
+              <Footer />
+            </footer>
+          </div>
+        </Router>
+      </LoadingState>
     </HelmetProvider>
   );
 }
