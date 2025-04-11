@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaCalendarAlt, FaClock, FaUser, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import emailjs from 'emailjs-com';
 
 const Reservation = () => {
   const [formData, setFormData] = useState({
@@ -28,15 +29,53 @@ const Reservation = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 2000);
+  e.preventDefault();
+  setIsSubmitting(true);
+
+ 
+  const vehicleCost = formData.vehicleType === 'sedan'
+    ? '$85/hour'
+    : formData.vehicleType === 'suv'
+    ? '$95/hour'
+    : formData.vehicleType === 'limo'
+    ? '$125/hour'
+    : '$200/hour';
+
+  
+  const emailParams = {
+    serviceType: formData.serviceType,
+    pickupLocation: formData.pickupLocation,
+    destination: formData.destination,
+    date: formData.date,
+    time: formData.time,
+    vehicleType: formData.vehicleType,
+    passengers: formData.passengers,
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    specialRequests: formData.specialRequests,
+    vehicleCost: vehicleCost, 
   };
+
+  emailjs
+    .send(
+      'service_9l3ongf', //  EmailJS service ID
+      'template_180gc2h', // EmailJS template ID
+      emailParams,
+      'bBkI6WMy-n-x6BP_L' // EmailJS public key
+    )
+    .then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setIsSubmitting(false);
+        setIsSuccess(true);
+      },
+      (error) => {
+        console.error('FAILED...', error);
+        setIsSubmitting(false);
+      }
+    );
+};
 
   const nextStep = () => setCurrentStep(prev => prev + 1);
   const prevStep = () => setCurrentStep(prev => prev - 1);
