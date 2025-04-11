@@ -43,6 +43,7 @@ const Reservation = () => {
 
   
   const emailParams = {
+    email: formData.email,
     serviceType: formData.serviceType,
     pickupLocation: formData.pickupLocation,
     destination: formData.destination,
