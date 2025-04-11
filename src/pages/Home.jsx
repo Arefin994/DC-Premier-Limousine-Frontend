@@ -141,7 +141,7 @@ const Home = () => {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
             style={{
-              backgroundImage: "url('/car.png')",
+              backgroundImage: "url('/44.webp')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundAttachment: "fixed",
