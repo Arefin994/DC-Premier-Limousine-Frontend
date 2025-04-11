@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
+  // Combined hover and click state
+  const isActive = isClicked || false; // Remove the "|| false" if you want click to override hover
+
   return (
     <div
-      className="group w-[320px] h-[320px] bg-[#1A1A1A] rounded-3xl relative shadow-xl shadow-black/50
-      transition-all duration-500 ease-in-out hover:rounded-tl-[56px] cursor-pointer"
+      className={`group w-[320px] h-[320px] bg-[#1A1A1A] rounded-3xl relative shadow-xl shadow-black/50
+      transition-all duration-500 ease-in-out hover:rounded-tl-[56px] cursor-pointer
+      ${isClicked ? 'rounded-tl-[56px]' : ''}`}
+      onClick={handleClick}
       role="button"
       tabIndex={0}
       aria-label={`View details for ${name}`}
+      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
       {/* Profile Image */}
       <div
-        className="absolute w-[calc(100%-12px)] h-[calc(100%-12px)] top-1.5 left-1.5 
+        className={`absolute w-[calc(100%-12px)] h-[calc(100%-12px)] top-1.5 left-1.5 
         rounded-3xl z-10 border-[#FFD700] overflow-hidden transition-all duration-500 
         ease-in-out delay-200 group-hover:w-[100px] group-hover:h-[100px] group-hover:aspect-square 
         group-hover:top-[10px] group-hover:left-[10px] group-hover:rounded-full group-hover:z-30 
-        group-hover:border-[8px] group-hover:border-[#FFD700] group-hover:shadow-[0_5px_5px_0_rgba(26,26,26,0.19)]"
+        group-hover:border-[8px] group-hover:border-[#FFD700] group-hover:shadow-[0_5px_5px_0_rgba(26,26,26,0.19)]
+        ${isClicked ? '!w-[100px] !h-[100px] !aspect-square !top-[10px] !left-[10px] !rounded-full !z-30 !border-[8px] !border-[#FFD700] !shadow-[0_5px_5px_0_rgba(26,26,26,0.19)]' : ''}`}
       >
         {imageUrl ? (
           <img
@@ -33,19 +46,22 @@ const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag }) => {
 
       {/* Bottom Content */}
       <div
-        className="absolute bottom-[4px] left-[4px] right-[4px] bg-[#1A1A1A]/80 rounded-3xl z-20 
+        className={`absolute bottom-[4px] left-[4px] right-[4px] bg-[#1A1A1A]/80 rounded-3xl z-20 
         shadow-[inset_0_5px_5px_0_rgba(26,26,26,0.19)] overflow-hidden border-4 border-[#626262]
         transition-all duration-500 [transition-timing-function:cubic-bezier(0.645,0.045,0.355,1)] 
-        group-hover:top-[20%] top-[75%]"
+        group-hover:top-[20%] top-[75%]
+        ${isClicked ? '!top-[20%]' : ''}`}
       >
         <div
-          className="absolute bottom-0 left-6 right-6 transition-all duration-500 ease-in-out 
-          group-hover:h-4/6 h-[65px]"
+          className={`absolute bottom-0 left-6 right-6 transition-all duration-500 ease-in-out 
+          group-hover:h-4/6 h-[65px]
+          ${isClicked ? '!h-4/6' : ''}`}
         >
           <span className="block text-lg text-[#FFD700] font-bold">{name}</span>
           <div
-            className="max-h-[calc(100%-50px)] overflow-y-auto custom-scrollbar mt-2 
-            transition-opacity duration-500 group-hover:opacity-100 opacity-0"
+            className={`max-h-[calc(100%-50px)] overflow-y-auto custom-scrollbar mt-2 
+            transition-opacity duration-500 group-hover:opacity-100 opacity-0
+            ${isClicked ? '!opacity-100' : ''}`}
           >
             <span className="block text-sm text-[#AAAAAA]">
               Passenger Capacity: {passenger}

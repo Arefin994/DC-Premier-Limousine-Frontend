@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaUsers, FaSnowflake, FaWifi, FaGlassCheers, FaStar, FaCheck } from 'react-icons/fa';
-import CarCard from '../components/Car_Card';
+import Car_Card from '../components/Car_Card';
 import { Link } from 'react-router-dom';
 
 const Fleet = () => {
@@ -221,7 +221,7 @@ const Fleet = () => {
           whileInView="show"
           viewport={{ once: true }}
           variants={container}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 "
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {topFleet.map((card, index) => (
             <motion.div
@@ -231,14 +231,7 @@ const Fleet = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <CarCard 
-              name={card.name}
-              imageUrl={card.imageUrl}
-              passenger={card.passenger}
-              luggage={card.luggage}
-              hourlyRate={card.hourlyRate}
-              flag={false}
-               />
+              <Car_Card {...card} flag={true} />
             </motion.div>
           ))}
         </motion.div>

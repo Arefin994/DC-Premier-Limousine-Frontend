@@ -3,6 +3,7 @@ import { FaPlane, FaBriefcase, FaGlassCheers, FaGraduationCap, FaCalendarAlt, Fa
 import { motion } from 'framer-motion';
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
+import CancellationPolicy from '../components/cancellation';
 
 const ServiceData = [
   {
@@ -228,53 +229,71 @@ const Services = () => {
         </div>
       </div>
 
+      <CancellationPolicy/>
+
       {/* Testimonials */}
-      <div className="bg-[#1A1A1A] py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            Client Testimonials
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "The airport pickup was flawless. The driver was waiting when we landed and helped with all our luggage.",
-                author: "Michael T.",
-                rating: 5
-              },
-              {
-                quote: "Perfect service for our wedding day. The limo arrived on time and was beautifully decorated.",
-                author: "Sarah K.",
-                rating: 5
-              },
-              {
-                quote: "Corporate clients were impressed with our transportation. Will definitely use again for business events.",
-                author: "James L.",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <motion.div 
-                key={index}
-                className="bg-[#626262] p-6 rounded-lg shadow-lg"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <FaStar key={i} className="text-[#FFD700]" />
-                  ))}
-                </div>
-                <p className="text-white italic mb-4">"{testimonial.quote}"</p>
-                <p className="font-semibold text-[#AAAAAA]">- {testimonial.author}</p>
-              </motion.div>
-            ))}
+      <div className="relative h-[100vh] overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          initial={{ opacity: 0.5 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            filter: "brightness(0.7)",
+          }}
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2 
+              className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              Client Testimonials
+            </motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  quote: "The airport pickup was flawless. The driver was waiting when we landed and helped with all our luggage.",
+                  author: "Michael T.",
+                  rating: 5
+                },
+                {
+                  quote: "Perfect service for our wedding day. The limo arrived on time and was beautifully decorated.",
+                  author: "Sarah K.",
+                  rating: 5
+                },
+                {
+                  quote: "Corporate clients were impressed with our transportation. Will definitely use again for business events.",
+                  author: "James L.",
+                  rating: 5
+                }
+              ].map((testimonial, index) => (
+                <motion.div 
+                  key={index}
+                  className="bg-[#1A1A1A]/80 p-6 rounded-lg border border-[#626262]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <FaStar key={i} className="text-[#FFD700]" />
+                    ))}
+                  </div>
+                  <p className="text-[#AAAAAA] italic mb-4">"{testimonial.quote}"</p>
+                  <p className="font-semibold text-[#FFD700]">- {testimonial.author}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
