@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Card from "../components/Card";
 import Car_Card from "../components/Car_Card";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
 
 const ServiceData = [
   {
@@ -79,138 +80,145 @@ const topFleet = [
 
 const Home = () => {
   return (
-    <div className="relative min-h-screen">
-      {/* Hero Section */}
-      <div className="relative h-screen">
-        <Hero />
-      </div>
-
-      {/* Services Section */}
-      <div className="bg-black bg-opacity-80 backdrop-blur-md flex items-center justify-center">
-        <div className="justify-center items-center flex flex-col m-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <motion.h1 className="text-4xl font-bold md:text-6xl lg:text-7xl text-center text-yellow-500 p-8">
-              Our Services
-            </motion.h1>
-            <motion.p className="text-lg text-white text-center mb-8 max-w-4xl mx-auto">
-              Experience the finest in luxury transportation with our premium
-              limo rental services in Washington, DC. Whether you're planning a
-              wedding, prom, corporate event, airport transfer, or a night out
-              on the town, we offer tailored solutions to make every occasion
-              unforgettable.
-            </motion.p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-32">
-            {ServiceData.map((service, index) => (
-              <Card
-                key={index}
-                name={service.name}
-                description={service.description}
-                features={service.features}
-                imageUrl={service.imageUrl}
-                to={service.to}
-              />
-            ))}
-          </div>
+    <>
+      <Helmet>
+        <title>DC Premier Limo - Luxury Transportation Services</title>
+        <meta name="description" content="Experience the finest in luxury transportation with DC Premier Limo. Book your ride for weddings, corporate events, airport transfers, and more." />
+        <meta name="keywords" content="luxury limo, DC limo, airport transfers, wedding transportation, corporate travel" />
+      </Helmet>
+      <div className="relative min-h-screen">
+        {/* Hero Section */}
+        <div className="relative h-screen">
+          <Hero />
         </div>
-      </div>
 
-      {/* Parallax Section */}
-      <div className="relative h-[100vh] overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0.5 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          style={{
-            backgroundImage: "url('/car.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-            filter: "brightness(0.7)",
-          }}
-        />
-
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <div className="text-center text-white p-8 max-w-4xl">
-            <motion.h2
-              className="text-4xl font-bold mb-6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              Luxury at Your Fingertips
-            </motion.h2>
-            <motion.p
-              className="text-xl mb-8"
+        {/* Services Section */}
+        <div className="bg-black bg-opacity-80 backdrop-blur-md flex items-center justify-center">
+          <div className="justify-center items-center flex flex-col m-8">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
             >
-              Experience the epitome of comfort and style with our premium fleet
-              of vehicles. Whether it's a special occasion or just a night out,
-              we ensure your journey is nothing short of extraordinary.
-            </motion.p>
-            <motion.button
-              className="px-8 py-3 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-400 transition"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Book Your Ride Now
-            </motion.button>
+              <motion.h1 className="text-4xl font-bold md:text-6xl lg:text-7xl text-center text-yellow-500 p-8">
+                Our Services
+              </motion.h1>
+              <motion.p className="text-lg text-white text-center mb-8 max-w-4xl mx-auto">
+                Experience the finest in luxury transportation with our premium
+                limo rental services in Washington, DC. Whether you're planning a
+                wedding, prom, corporate event, airport transfer, or a night out
+                on the town, we offer tailored solutions to make every occasion
+                unforgettable.
+              </motion.p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-32">
+              {ServiceData.map((service, index) => (
+                <Card
+                  key={index}
+                  name={service.name}
+                  description={service.description}
+                  features={service.features}
+                  imageUrl={service.imageUrl}
+                  to={service.to}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Top Fleet Section */}
-      <div className="bg-gray-100 py-20">
-        <div className="max-w-screen-2xl mx-auto px-8">
+        {/* Parallax Section */}
+        <div className="relative h-[100vh] overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            className="absolute inset-0"
+            initial={{ opacity: 0.5 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Our Top Fleet
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our experienced team of professionals is dedicated to providing
-              you with the best luxury transportation experience.
-            </p>
-          </motion.div>
+            style={{
+              backgroundImage: "url('/car.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundAttachment: "fixed",
+              filter: "brightness(0.7)",
+            }}
+          />
 
-          <div className="flex flex-wrap justify-center gap-16">
-            {topFleet.map((card, index) => (
-              <motion.div
-                key={index}
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div className="text-center text-white p-8 max-w-4xl">
+              <motion.h2
+                className="text-4xl font-bold mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                Luxury at Your Fingertips
+              </motion.h2>
+              <motion.p
+                className="text-xl mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Car_Card 
-                  name={card.name}
-                  imageUrl={card.imageUrl}
-                  passenger={card.passenger}
-                  luggage={card.luggage}
-                  hourlyRate={card.hourlyRate}
-                  flag={true}
-                />
-              </motion.div>
-            ))}
+                Experience the epitome of comfort and style with our premium fleet
+                of vehicles. Whether it's a special occasion or just a night out,
+                we ensure your journey is nothing short of extraordinary.
+              </motion.p>
+              <motion.button
+                className="px-8 py-3 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-400 transition"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Book Your Ride Now
+              </motion.button>
+            </div>
+          </div>
+        </div>
+
+        {/* Top Fleet Section */}
+        <div className="bg-gray-100 py-20">
+          <div className="max-w-screen-2xl mx-auto px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Our Top Fleet
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Our experienced team of professionals is dedicated to providing
+                you with the best luxury transportation experience.
+              </p>
+            </motion.div>
+
+            <div className="flex flex-wrap justify-center gap-16">
+              {topFleet.map((card, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Car_Card 
+                    name={card.name}
+                    imageUrl={card.imageUrl}
+                    passenger={card.passenger}
+                    luggage={card.luggage}
+                    hourlyRate={card.hourlyRate}
+                    flag={true}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

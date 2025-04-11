@@ -2,9 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Home, ArrowLeft } from "lucide-react";
+import { Helmet } from 'react-helmet-async';
 
 const NotFound = () => {
   return (
+    <>
+    <Helmet>
+        <title>Page Not Found - DC Premier Limo</title>
+        <meta name="description" content="The page you are looking for does not exist. Return to the homepage or explore our services." />
+    </Helmet>
     <div className="min-h-screen pt-20 flex items-center justify-center bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-lg mx-auto text-center">
@@ -60,6 +66,7 @@ const NotFound = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
