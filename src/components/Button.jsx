@@ -11,7 +11,7 @@ const CustomButton = ({ href, text, icon }) => {
         scale: 1.05, // Pop-up effect
         translateX: -4,
         translateY: -4,
-        boxShadow: "4px 4px 0px black", // Lift effect
+        boxShadow: "4px 4px 0px black", // Lift 
       }}
       whileTap={{
         scale: 1,

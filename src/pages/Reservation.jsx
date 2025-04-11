@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCalendarAlt, FaClock, FaUser, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock, FaUser, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const Reservation = () => {
@@ -58,8 +58,8 @@ const Reservation = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-[#1a1a1a] py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -67,68 +67,77 @@ const Reservation = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-3xl font-extrabold text-[#FFD700] sm:text-4xl">
-            Book Your Luxury Ride
+          <h1 className="text-4xl font-bold text-[#FFD700] sm:text-5xl mb-4">
+            Reserve Your Luxury Ride
           </h1>
-          <p className="mt-4 text-xl text-gray-300">
-            Complete the form below to reserve your premium transportation
+          <p className="text-xl text-[#AAAAAA] max-w-2xl mx-auto">
+            Experience premium transportation with our exclusive fleet
           </p>
         </motion.div>
 
         {/* Progress Steps */}
-        <div className="flex justify-between mb-8">
+        <div className="flex justify-between mb-12 relative">
+          <div className="absolute top-1/2 left-0 right-0 h-1 bg-[#626262] -z-10 transform -translate-y-1/2"></div>
           {[1, 2, 3].map((step) => (
-            <div key={step} className="flex flex-col items-center w-1/3">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${currentStep >= step ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} font-semibold`}>
+            <div key={step} className="flex flex-col items-center">
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${currentStep >= step ? 'bg-[#FFD700] text-[#1A1A1A]' : 'bg-[#626262] text-[#AAAAAA]'} font-semibold text-lg mb-2 transition-all duration-300`}>
                 {step}
               </div>
-              <div className={`mt-2 text-sm ${currentStep >= step ? 'text-blue-600 font-medium' : 'text-gray-500'}`}>
-                {step === 1 ? 'Trip Details' : step === 2 ? 'Vehicle Selection' : 'Your Information'}
+              <div className={`text-sm ${currentStep >= step ? 'text-[#FFD700] font-medium' : 'text-[#AAAAAA]'}`}>
+                {step === 1 ? 'Trip Details' : step === 2 ? 'Vehicle' : 'Your Info'}
               </div>
             </div>
           ))}
         </div>
 
-          {isSuccess ? (
+        {isSuccess ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white p-8 rounded-lg shadow-lg text-center"
+            className="bg-[#1A1A1A] p-8 sm:p-12 rounded-xl border border-[#FFD700]/20 shadow-lg text-center"
           >
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-24 h-24 bg-[#1A1A1A] border-2 border-[#FFD700] rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-12 h-12 text-[#FFD700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Reservation Confirmed!</h2>
-            <p className="text-gray-600 mb-6">
-              Thank you for booking with us. We've sent a confirmation to {formData.email}.
+            <h2 className="text-3xl font-bold text-[#FFD700] mb-4">Reservation Confirmed!</h2>
+            <p className="text-[#AAAAAA] text-lg mb-8 max-w-lg mx-auto">
+              Thank you for choosing our luxury service. A confirmation has been sent to <span className="text-[#FFD700]">{formData.email}</span>.
             </p>
-            <button
-              onClick={() => {
-                setIsSuccess(false);
-                setCurrentStep(1);
-                setFormData({
-                  serviceType: '',
-                  pickupLocation: '',
-                  destination: '',
-                  date: '',
-                  time: '',
-                  vehicleType: '',
-                  passengers: 1,
-                  name: '',
-                  email: '',
-                  phone: '',
-                  specialRequests: ''
-                });
-              }}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300"
-            >
-              Make Another Reservation
-            </button>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button
+                onClick={() => {
+                  setIsSuccess(false);
+                  setCurrentStep(1);
+                  setFormData({
+                    serviceType: '',
+                    pickupLocation: '',
+                    destination: '',
+                    date: '',
+                    time: '',
+                    vehicleType: '',
+                    passengers: 1,
+                    name: '',
+                    email: '',
+                    phone: '',
+                    specialRequests: ''
+                  });
+                }}
+                className="bg-[#FFD700] hover:bg-[#FFE657] text-[#1A1A1A] font-medium py-3 px-8 rounded-lg transition-colors duration-300"
+              >
+                Book Another Ride
+              </button>
+              <a 
+                href="/contact" 
+                className="border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10 font-medium py-3 px-8 rounded-lg transition-colors duration-300"
+              >
+                Contact Us
+              </a>
+            </div>
           </motion.div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-lg overflow-hidden">
+          <form onSubmit={handleSubmit} className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-[#626262] shadow-2xl">
             {/* Step 1: Trip Details */}
             {currentStep === 1 && (
               <motion.div
@@ -137,38 +146,43 @@ const Reservation = () => {
                 transition={{ duration: 0.3 }}
                 className="p-6 sm:p-8"
               >
-                <h2 className="text-xl font-semibold text-gray-800 mb-6">Trip Information</h2>
+                <div className="flex items-center mb-8">
+                  <div className="w-10 h-10 rounded-full bg-[#FFD700] text-[#1A1A1A] flex items-center justify-center mr-4">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <h2 className="text-2xl font-semibold text-[#FFD700]">Trip Information</h2>
+                </div>
                 
-                <div className="space-y-5">
+                <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Service Type</label>
+                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Service Type</label>
                     <select
                       name="serviceType"
                       value={formData.serviceType}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                       required
                     >
-                      <option value="">Select a service</option>
+                      <option value="" className="text-[#AAAAAA]">Select a service</option>
                       {serviceOptions.map((service, index) => (
-                        <option key={index} value={service.toLowerCase().replace(' ', '-')}>{service}</option>
+                        <option key={index} value={service.toLowerCase().replace(' ', '-')} className="bg-[#1A1A1A]">{service}</option>
                       ))}
                     </select>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Pickup Location</label>
+                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Pickup Location</label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FaMapMarkerAlt className="text-gray-400" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
+                          <FaMapMarkerAlt />
                         </div>
                         <input
                           type="text"
                           name="pickupLocation"
                           value={formData.pickupLocation}
                           onChange={handleChange}
-                          className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                           placeholder="Address, airport, hotel..."
                           required
                         />
@@ -176,17 +190,17 @@ const Reservation = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Destination</label>
+                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Destination</label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FaMapMarkerAlt className="text-gray-400" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
+                          <FaMapMarkerAlt />
                         </div>
                         <input
                           type="text"
                           name="destination"
                           value={formData.destination}
                           onChange={handleChange}
-                          className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                           placeholder="Address, airport, hotel..."
                           required
                         />
@@ -194,36 +208,36 @@ const Reservation = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Date</label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FaCalendarAlt className="text-gray-400" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
+                          <FaCalendarAlt />
                         </div>
                         <input
                           type="date"
                           name="date"
                           value={formData.date}
                           onChange={handleChange}
-                          className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                           required
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Time</label>
+                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Time</label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FaClock className="text-gray-400" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
+                          <FaClock />
                         </div>
                         <input
                           type="time"
                           name="time"
                           value={formData.time}
                           onChange={handleChange}
-                          className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                           required
                         />
                       </div>
@@ -231,7 +245,7 @@ const Reservation = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Number of Passengers</label>
+                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Number of Passengers</label>
                     <input
                       type="number"
                       name="passengers"
@@ -239,19 +253,19 @@ const Reservation = () => {
                       max="20"
                       value={formData.passengers}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="mt-8 flex justify-end">
+                <div className="mt-10 flex justify-end">
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300"
+                    className="bg-[#FFD700] hover:bg-[#FFE657] text-[#1A1A1A] font-medium py-3 px-8 rounded-lg transition-colors duration-300 flex items-center"
                   >
-                    Next: Select Vehicle
+                    Next: Select Vehicle <FaChevronRight className="ml-2" />
                   </button>
                 </div>
               </motion.div>
@@ -265,52 +279,69 @@ const Reservation = () => {
                 transition={{ duration: 0.3 }}
                 className="p-6 sm:p-8"
               >
-                <h2 className="text-xl font-semibold text-gray-800 mb-6">Select Your Vehicle</h2>
+                <div className="flex items-center mb-8">
+                  <div className="w-10 h-10 rounded-full bg-[#FFD700] text-[#1A1A1A] flex items-center justify-center mr-4">
+                    <FaCarAlt />
+                  </div>
+                  <h2 className="text-2xl font-semibold text-[#FFD700]">Select Your Vehicle</h2>
+                </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {vehicleOptions.map((vehicle) => (
                     <div 
                       key={vehicle.value}
-                      className={`border-2 rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${formData.vehicleType === vehicle.value ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200 hover:border-gray-300'}`}
+                      className={`relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${formData.vehicleType === vehicle.value ? 'ring-2 ring-[#FFD700]' : 'hover:ring-1 hover:ring-[#626262]'}`}
                       onClick={() => setFormData(prev => ({ ...prev, vehicleType: vehicle.value }))}
                     >
-                      <div className="h-40 overflow-hidden">
+                      <div className="h-48 overflow-hidden">
                         <img 
                           src={vehicle.image} 
                           alt={vehicle.label}
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                         />
                       </div>
-                      <div className="p-4">
-                        <h3 className="font-medium text-gray-800">{vehicle.label}</h3>
-                        <div className="mt-2 flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Up to {vehicle.value === 'sedan' ? '4' : vehicle.value === 'suv' ? '6' : vehicle.value === 'limo' ? '10' : '20'} passengers</span>
-                          <span className="font-semibold text-blue-600">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 className="font-bold text-white text-lg">{vehicle.label}</h3>
+                        <div className="flex justify-between items-center mt-2">
+                          <span className="text-sm text-[#AAAAAA]">
+                            {vehicle.value === 'sedan' ? 'Up to 4 passengers' : 
+                             vehicle.value === 'suv' ? 'Up to 6 passengers' : 
+                             vehicle.value === 'limo' ? 'Up to 10 passengers' : 'Up to 20 passengers'}
+                          </span>
+                          <span className="font-bold text-[#FFD700]">
                             {vehicle.value === 'sedan' ? '$85/hour' : 
                              vehicle.value === 'suv' ? '$95/hour' : 
                              vehicle.value === 'limo' ? '$125/hour' : '$200/hour'}
                           </span>
                         </div>
                       </div>
+                      {formData.vehicleType === vehicle.value && (
+                        <div className="absolute top-4 right-4 w-6 h-6 bg-[#FFD700] rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-[#1A1A1A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-8 flex justify-between">
+                <div className="mt-10 flex justify-between">
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg transition-colors duration-300"
+                    className="bg-[#262626] hover:bg-[#333333] text-[#AAAAAA] font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center"
                   >
-                    Back
+                    <FaChevronLeft className="mr-2" /> Back
                   </button>
                   <button
                     type="button"
                     onClick={nextStep}
                     disabled={!formData.vehicleType}
-                    className={`${!formData.vehicleType ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300`}
+                    className={`${!formData.vehicleType ? 'bg-[#626262] cursor-not-allowed' : 'bg-[#FFD700] hover:bg-[#FFE657]'} text-[#1A1A1A] font-medium py-3 px-8 rounded-lg transition-colors duration-300 flex items-center`}
                   >
-                    Next: Your Information
+                    Next: Your Information <FaChevronRight className="ml-2" />
                   </button>
                 </div>
               </motion.div>
@@ -324,22 +355,27 @@ const Reservation = () => {
                 transition={{ duration: 0.3 }}
                 className="p-6 sm:p-8"
               >
-                <h2 className="text-xl font-semibold text-gray-800 mb-6">Your Information</h2>
+                <div className="flex items-center mb-8">
+                  <div className="w-10 h-10 rounded-full bg-[#FFD700] text-[#1A1A1A] flex items-center justify-center mr-4">
+                    <FaUser />
+                  </div>
+                  <h2 className="text-2xl font-semibold text-[#FFD700]">Your Information</h2>
+                </div>
                 
-                <div className="space-y-5">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Full Name</label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FaUser className="text-gray-400" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
+                          <FaUser />
                         </div>
                         <input
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                           placeholder="John Doe"
                           required
                         />
@@ -347,17 +383,17 @@ const Reservation = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Phone Number</label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FaPhoneAlt className="text-gray-400" />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
+                          <FaPhoneAlt />
                         </div>
                         <input
                           type="tel"
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                           placeholder="(123) 456-7890"
                           required
                         />
@@ -366,17 +402,17 @@ const Reservation = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Email Address</label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FaEnvelope className="text-gray-400" />
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
+                        <FaEnvelope />
                       </div>
                       <input
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                        className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                         placeholder="your@email.com"
                         required
                       />
@@ -384,34 +420,34 @@ const Reservation = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Special Requests (Optional)</label>
+                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">Special Requests (Optional)</label>
                     <textarea
                       name="specialRequests"
                       value={formData.specialRequests}
                       onChange={handleChange}
                       rows="3"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
                       placeholder="Child seats, wheelchair accessibility, etc."
                     ></textarea>
                   </div>
                 </div>
 
-                <div className="mt-8 flex justify-between">
+                <div className="mt-10 flex justify-between">
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg transition-colors duration-300"
+                    className="bg-[#262626] hover:bg-[#333333] text-[#AAAAAA] font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center"
                   >
-                    Back
+                    <FaChevronLeft className="mr-2" /> Back
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`${isSubmitting ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300 flex items-center`}
+                    className={`${isSubmitting ? 'bg-[#FFD700]/80' : 'bg-[#FFD700] hover:bg-[#FFE657]'} text-[#1A1A1A] font-medium py-3 px-8 rounded-lg transition-colors duration-300 flex items-center`}
                   >
                     {isSubmitting ? (
                       <>
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-[#1A1A1A]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -433,16 +469,25 @@ const Reservation = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="mt-8 bg-white p-6 rounded-lg shadow-md"
+            className="mt-8 bg-[#1A1A1A] p-6 rounded-xl border border-[#626262]"
           >
-            <h3 className="font-semibold text-gray-800 mb-3">Need Help?</h3>
-            <p className="text-gray-600 mb-4">
-              Call our reservation specialists at <a href="tel:+15551234567" className="text-blue-600 hover:underline">(555) 123-4567</a> or email us at <a href="mailto:reservations@yourcompany.com" className="text-blue-600 hover:underline">reservations@yourcompany.com</a>
+            <h3 className="font-semibold text-[#FFD700] mb-4 text-lg">Need Assistance?</h3>
+            <p className="text-[#AAAAAA] mb-4">
+              Our concierge team is available 24/7 to assist with your reservation.
             </p>
-            <div className="text-sm text-gray-500">
-              <p className="mb-2">• 24/7 availability for last-minute bookings</p>
-              <p className="mb-2">• Flight tracking for airport pickups</p>
-              <p>• Meet & greet service available upon request</p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="tel:+18884129150" 
+                className="flex items-center text-[#FFD700] hover:text-[#FFE657] transition-colors"
+              >
+                <FaPhoneAlt className="mr-2" /> (888) 412-9150
+              </a>
+              <a 
+                href="mailto:concierge@luxuryrides.com" 
+                className="flex items-center text-[#FFD700] hover:text-[#FFE657] transition-colors"
+              >
+                <FaEnvelope className="mr-2" /> concierge@luxuryrides.com
+              </a>
             </div>
           </motion.div>
         )}

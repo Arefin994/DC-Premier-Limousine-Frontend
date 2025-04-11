@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaUsers, FaSnowflake, FaWifi, FaGlassCheers, FaStar, FaCheck } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 import Car_Card from '../components/Car_Card';
 import { Link } from 'react-router-dom';
 
@@ -231,7 +231,7 @@ const Fleet = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Car_Card {...card} flag={true} />
+              <Car_Card {...card} flag={false} />
             </motion.div>
           ))}
         </motion.div>
