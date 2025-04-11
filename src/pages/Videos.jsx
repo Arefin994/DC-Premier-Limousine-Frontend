@@ -30,11 +30,13 @@ const Videos = () => {
         <meta name="description" content="Watch videos showcasing our luxury fleet, customer testimonials, and behind-the-scenes operations." />
         <meta name="keywords" content="limo videos, luxury fleet tour, customer testimonials, DC limo videos" />
       </Helmet>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-6">Videos</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <main className="container mx-auto px-4 py-8">
+        <header>
+          <h1 className="text-4xl font-bold mb-6">Videos</h1>
+        </header>
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos.map((video, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <article key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="relative">
                 <div className="text-6xl p-8 bg-gray-100 flex justify-center items-center">
                   {video.thumbnail}
@@ -50,10 +52,10 @@ const Videos = () => {
                   Watch Video
                 </button>
               </div>
-            </div>
+            </article>
           ))}
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 };

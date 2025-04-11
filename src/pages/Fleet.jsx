@@ -11,6 +11,7 @@ const Fleet = () => {
       name: "Mercedes S600 Limo",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Mercedes S600 luxury limousine",
       passenger: 6,
       luggage: 4,
       hourlyRate: "$120/hour",
@@ -19,6 +20,7 @@ const Fleet = () => {
       name: "BMW 7 Series Executive",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "BMW 7 Series executive sedan",
       passenger: 5,
       luggage: 3,
       hourlyRate: "$110/hour",
@@ -27,6 +29,7 @@ const Fleet = () => {
       name: "Cadillac Escalade Limousine",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Cadillac Escalade luxury limousine",
       passenger: 8,
       luggage: 6,
       hourlyRate: "$150/hour",
@@ -35,6 +38,7 @@ const Fleet = () => {
       name: "Lincoln Navigator Limo",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Lincoln Navigator luxury limousine",
       passenger: 7,
       luggage: 5,
       hourlyRate: "$140/hour",
@@ -43,6 +47,7 @@ const Fleet = () => {
       name: "Hummer Limousine",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Hummer luxury limousine",
       passenger: 10,
       luggage: 8,
       hourlyRate: "$160/hour",
@@ -51,6 +56,7 @@ const Fleet = () => {
       name: "Chrysler 300 Limo",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Chrysler 300 luxury limousine",
       passenger: 6,
       luggage: 4,
       hourlyRate: "$130/hour",
@@ -59,6 +65,7 @@ const Fleet = () => {
       name: "Audi A8 Limousine",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Audi A8 luxury limousine",
       passenger: 5,
       luggage: 3,
       hourlyRate: "$125/hour",
@@ -67,6 +74,7 @@ const Fleet = () => {
       name: "Rolls Royce Phantom",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Rolls Royce Phantom luxury limousine",
       passenger: 4,
       luggage: 2,
       hourlyRate: "$250/hour",
@@ -75,6 +83,7 @@ const Fleet = () => {
       name: "Bentley Mulsanne Limo",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Bentley Mulsanne luxury limousine",
       passenger: 4,
       luggage: 2,
       hourlyRate: "$240/hour",
@@ -83,6 +92,7 @@ const Fleet = () => {
       name: "Lexus LS Limousine",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Lexus LS luxury limousine",
       passenger: 5,
       luggage: 3,
       hourlyRate: "$115/hour",
@@ -91,6 +101,7 @@ const Fleet = () => {
       name: "Jaguar XJ Limousine",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Jaguar XJ luxury limousine",
       passenger: 4,
       luggage: 2,
       hourlyRate: "$135/hour",
@@ -99,6 +110,7 @@ const Fleet = () => {
       name: "Tesla Model S Limo",
       imageUrl:
         "https://images.unsplash.com/photo-1730800328198-f9efbf9db53f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      altText: "Tesla Model S luxury limousine",
       passenger: 5,
       luggage: 3,
       hourlyRate: "$180/hour",

@@ -26,14 +26,17 @@ function ScrollToTop() {
   return null;
 }
 
+// Replaced generic divs with semantic tags
 function App() {
   return (
     <HelmetProvider>
       <Router>
         <div className="min-h-screen flex flex-col">
-          <Navbar />
+          <header>
+            <Navbar />
+          </header>
           <main className="flex-grow">
-            <ScrollToTop /> {/* Add this right after opening main tag */}
+            <ScrollToTop />
             <ToastContainer
               position="top-right"
               autoClose={5000}
@@ -57,7 +60,9 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
-          <Footer />
+          <footer>
+            <Footer />
+          </footer>
         </div>
       </Router>
     </HelmetProvider>

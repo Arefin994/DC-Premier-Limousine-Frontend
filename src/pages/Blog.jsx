@@ -19,6 +19,7 @@ const blogPosts = [
       "Your wedding day deserves nothing but perfection. Beyond the obvious elegance, luxury limousines offer climate control, privacy partitions, champagne service, and spacious interiors for bridal parties. Professional chauffeurs handle D.C. traffic while you relax. We explore how the right vehicle can reduce stress and create unforgettable photo opportunities.",
     imageUrl:
       "https://images.unsplash.com/photo-1511795409834-ef04d7f7d019?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    altText: "Luxury limo for wedding day",
     date: "May 15, 2024",
     link: "#",
     category: "Weddings",
@@ -30,6 +31,7 @@ const blogPosts = [
       "First impressions matter in business. Our analysis shows companies using professional transportation services see 28% higher client satisfaction scores. Learn how to coordinate multi-vehicle logistics for conferences, how discreet chauffeurs enhance executive travel, and why hybrid luxury vehicles are becoming the choice for eco-conscious firms in the capital region.",
     imageUrl:
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    altText: "Luxury transportation for corporate events",
     date: "April 28, 2024",
     link: "#",
     category: "Business",
@@ -41,6 +43,7 @@ const blogPosts = [
       "Comparing costs between rideshares and chauffeur services reveals surprising truths. With meet-and-greet service, flight tracking, and 24/7 availability, professional drivers eliminate airport stress. We break down hidden rideshare costs, luggage capacity issues, and safety considerations - plus tips for getting the best value on your next DCA, IAD, or BWI transfer.",
     imageUrl:
       "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    altText: "Professional airport transfer service",
     date: "April 22, 2024",
     link: "#",
     category: "Travel",
@@ -52,6 +55,7 @@ const blogPosts = [
       "From classic stretch limousines to sleek Mercedes Sprinter vans, each vehicle serves different needs. Our comprehensive guide helps you choose: 10-passenger SUVs for sports teams, vintage cars for proms, or armored vehicles for executives. Includes maintenance tips to keep your chosen vehicle looking pristine for the big event.",
     imageUrl:
       "https://images.unsplash.com/photo-1617933472044-384a37a1b0a3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    altText: "Guide to luxury vehicles",
     date: "April 10, 2024",
     link: "#",
     category: "Guide",
@@ -63,6 +67,7 @@ const blogPosts = [
       "The luxury transportation industry is going green without compromising comfort. Discover how electric limousines achieve 300-mile ranges, how carbon offset programs work, and why hybrid executive cars are dominating D.C.s political circuit. We interview fleet managers about the challenges and rewards of sustainable luxury service.",
     imageUrl:
       "https://images.unsplash.com/photo-1629444295295-7ad2f1a0a5b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    altText: "Eco-friendly luxury transport",
     date: "March 29, 2024",
     link: "#",
     category: "Trends",
@@ -74,6 +79,7 @@ const blogPosts = [
       "What does it take to become a top-tier chauffeur in Washington D.C.? We follow a 20-year veteran through a typical day - from pre-dawn vehicle inspections to navigating diplomatic motorcades. Learn about the extensive training, discreet professionalism, and local knowledge that separates true luxury service from ordinary drivers.",
     imageUrl:
       "https://images.unsplash.com/photo-1601584115197-04ecc0da31d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    altText: "Life of a luxury chauffeur",
     date: "March 15, 2024",
     link: "#",
     category: "Insider",
@@ -153,7 +159,7 @@ const Blog = () => {
                 <div className="overflow-hidden">
                   <img
                     src={post.imageUrl}
-                    alt={post.title}
+                    alt={post.altText}
                     className="w-full h-64 object-cover transform transition duration-700 group-hover:scale-110"
                   />
                 </div>

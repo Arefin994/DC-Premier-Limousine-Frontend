@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 
 const imgs = [
-    "/1.png",
-    "/2.png",
-    "/3.png",
-    "/4.png",
-    "/5.png",
-    "/6.png",
-    "/7.png",
+    "/11.webp",
+    "/22.webp",
+    "/33.webp",
+    "/44.webp",
+    "/55.webp",
 ];
 
 const AUTO_DELAY = 5000; // 5 seconds

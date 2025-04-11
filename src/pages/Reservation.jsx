@@ -65,22 +65,21 @@ const Reservation = () => {
         <meta name="description" content="Reserve your luxury ride with DC Premier Limo. Easy online booking for weddings, corporate events, and airport transfers." />
         <meta name="keywords" content="book limo, reserve ride, online booking, DC limo reservation" />
       </Helmet>
-      <div className="min-h-screen bg-[#1a1a1a] py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h1 className="text-3xl font-extrabold text-[#FFD700] sm:text-4xl">
+      <main className="min-h-screen bg-[#1a1a1a] py-24 px-4 sm:px-6 lg:px-8">
+        <section className="max-w-4xl mx-auto">
+          <header className="text-center mb-12">
+            <motion.h1 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl font-extrabold text-[#FFD700] sm:text-4xl"
+            >
               Book Your Luxury Ride
-            </h1>
+            </motion.h1>
             <p className="mt-4 text-xl text-gray-300">
               Complete the form below to reserve your premium transportation
             </p>
-          </motion.div>
+          </header>
 
           {/* Progress Steps */}
           <div className="flex justify-between mb-8">
@@ -453,8 +452,8 @@ const Reservation = () => {
               </div>
             </motion.div>
           )}
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 };

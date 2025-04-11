@@ -101,9 +101,8 @@ const Services = () => {
         <meta name="description" content="Explore our premium limo services, including airport transfers, corporate travel, wedding transportation, and more." />
         <meta name="keywords" content="limo services, airport transfers, corporate travel, wedding transportation, luxury limo" />
       </Helmet>
-      <div className="bg-[#1A1A1A]">
-        {/* Hero Section with Parallax */}
-        <div className="relative h-[100vh] overflow-hidden">
+      <main className="bg-[#1A1A1A]">
+        <header className="relative h-[100vh] overflow-hidden">
           <motion.div
             className="absolute inset-0"
             initial={{ opacity: 0.5 }}
@@ -147,10 +146,9 @@ const Services = () => {
               </Link>
             </div>
           </div>
-        </div>
+        </header>
 
-        {/* Services Grid */}
-        <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <motion.h2 
             className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
             initial={{ opacity: 0, y: 20 }}
@@ -162,7 +160,7 @@ const Services = () => {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ServiceData.map((service, index) => (
-              <motion.div
+              <motion.article
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -176,13 +174,13 @@ const Services = () => {
                   imageUrl={service.imageUrl}
                   to={service.to}
                 />
-              </motion.div>
+              </motion.article>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Benefits Section with Parallax */}
-        <div className="relative h-[100vh] overflow-hidden">
+        <section className="relative h-[100vh] overflow-hidden">
           <motion.div
             className="absolute inset-0"
             initial={{ opacity: 0.5 }}
@@ -234,12 +232,12 @@ const Services = () => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <CancellationPolicy/>
 
         {/* Testimonials */}
-        <div className="relative h-[100vh] overflow-hidden">
+        <section className="relative h-[100vh] overflow-hidden">
           <motion.div
             className="absolute inset-0"
             initial={{ opacity: 0.5 }}
@@ -283,7 +281,7 @@ const Services = () => {
                     rating: 5
                   }
                 ].map((testimonial, index) => (
-                  <motion.div 
+                  <motion.article 
                     key={index}
                     className="bg-[#1A1A1A]/80 p-6 rounded-lg border border-[#626262]"
                     initial={{ opacity: 0, y: 20 }}
@@ -298,15 +296,15 @@ const Services = () => {
                     </div>
                     <p className="text-[#AAAAAA] italic mb-4">"{testimonial.quote}"</p>
                     <p className="font-semibold text-[#FFD700]">- {testimonial.author}</p>
-                  </motion.div>
+                  </motion.article>
                 ))}
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* CTA Section */}
-        <div className="bg-[#FFD700] py-16">
+        <section className="bg-[#FFD700] py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.h2 
               className="text-3xl font-bold mb-6 text-black"
@@ -347,8 +345,8 @@ const Services = () => {
               </a>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 };
