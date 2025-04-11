@@ -29,12 +29,48 @@ const Reservation = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 2000);
+
+    const vehicleCost = formData.vehicleType === 'sedan'
+      ? '$85/hour'
+      : formData.vehicleType === 'suv'
+      ? '$95/hour'
+      : formData.vehicleType === 'limo'
+      ? '$125/hour'
+      : '$200/hour';
+
+    const emailParams = {
+      email: formData.email,
+      serviceType: formData.serviceType,
+      pickupLocation: formData.pickupLocation,
+      destination: formData.destination,
+      date: formData.date,
+      time: formData.time,
+      vehicleType: formData.vehicleType,
+      passengers: formData.passengers,
+      name: formData.name,
+      phone: formData.phone,
+      specialRequests: formData.specialRequests,
+      vehicleCost: vehicleCost,
+    };
+
+    emailjs
+      .send(
+        'service_9l3ongf',
+        'template_180gc2h',
+        emailParams,
+        'bBkI6WMy-n-x6BP_L'
+      )
+      .then(
+        (response) => {
+          console.log('SUCCESS!', response.status, response.text);
+          setIsSubmitting(false);
+          setIsSuccess(true);
+        },
+        (error) => {
+          console.error('FAILED...', error);
+          setIsSubmitting(false);
+        }
+      );
   };
 
   const nextStep = () => setCurrentStep(prev => prev + 1);
