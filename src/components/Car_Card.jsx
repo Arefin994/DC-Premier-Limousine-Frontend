@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag }) => {
+const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag = false }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -96,10 +96,6 @@ Car_Card.propTypes = {
   luggage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   hourlyRate: PropTypes.string.isRequired,
   flag: PropTypes.bool
-};
-
-Car_Card.defaultProps = {
-  flag: false
 };
 
 export default Car_Card;

@@ -218,58 +218,6 @@ const Blog = () => {
             </div>
           </div>
         </section>
-
-        {/* Enhanced Footer */}
-        <footer className="bg-gray-900 text-gray-400 py-12">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="mb-6 md:mb-0">
-                <h3 className="text-xl font-bold text-[#FFD700] mb-4">
-                  Luxury Transport Services
-                </h3>
-                <p className="max-w-xs">
-                  Premium transportation solutions for Washington D.C. and
-                  surrounding areas.
-                </p>
-              </div>
-
-              <div className="flex space-x-6 mb-6 md:mb-0">
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-[#FFD700] transition duration-300"
-                >
-                  <Facebook size={24} />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-[#FFD700] transition duration-300"
-                >
-                  <Instagram size={24} />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-[#FFD700] transition duration-300"
-                >
-                  <Twitter size={24} />
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-[#FFD700] transition duration-300"
-                >
-                  <Mail size={24} />
-                </a>
-              </div>
-
-              <div className="text-sm">
-                <p>
-                  &copy; {new Date().getFullYear()} Luxury Transport Services. All
-                  Rights Reserved.
-                </p>
-                <p className="mt-2">Designed with elegance in Washington D.C.</p>
-              </div>
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   );

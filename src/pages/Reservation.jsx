@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCalendarAlt, FaClock, FaUser, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock, FaUser, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaChevronRight, FaChevronLeft, FaCarAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import emailjs from 'emailjs-com';
