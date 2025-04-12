@@ -250,7 +250,7 @@ const Fleet = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Car_Card {...card} flag={true} />
+                <Car_Card {...card} flag={false} />
               </motion.div>
             ))}
           </motion.div>
