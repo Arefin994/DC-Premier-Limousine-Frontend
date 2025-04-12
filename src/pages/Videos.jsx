@@ -25,6 +25,7 @@ const Videos = () => {
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [backgroundError, setBackgroundError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -106,19 +107,29 @@ const Videos = () => {
         <div className="relative h-[70vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-black opacity-60 z-10" />
-            <video
-              className="w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster="https://images.unsplash.com/photo-1702339955839-489ff9b5ce58?q=80&w=2131&auto=format"
-            >
-              <source
-                src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=164&oauth2_token_id=57447761"
-                type="video/mp4"
+            {!backgroundError ? (
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster="https://images.unsplash.com/photo-1470847352555-49687d7bc7ec?q=80&w=2131&auto=format"
+                onError={() => setBackgroundError(true)}
+              >
+                <source
+                  src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=164&oauth2_token_id=57447761"
+                  type="video/mp4"
+                />
+              </video>
+            ) : (
+              <div 
+                className="w-full h-full bg-cover bg-center"
+                style={{
+                  backgroundImage: 'url("https://images.unsplash.com/photo-1470847352555-49687d7bc7ec?q=80&w=2131&auto=format")'
+                }}
               />
-            </video>
+            )}
           </div>
           <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.h1
@@ -193,8 +204,7 @@ const Videos = () => {
                         alt={video.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                         onError={(e) => {
-                          e.target.src =
-                            "https://via.placeholder.com/800x450.png/262626/AAAAAA?text=Video+Thumbnail";
+                          e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23262626'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='24' fill='%23AAAAAA'%3EVideo Thumbnail%3C/text%3E%3C/svg%3E";
                         }}
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -248,48 +258,31 @@ const Videos = () => {
                   onClick={() => setSelectedVideo(null)}
                   className="absolute -top-12 right-0 text-white hover:text-[#FFD700] transition-colors z-10"
                 >
-                  <FaTimes className="text-3xl" />
+                  <FaTimes size={24} />
                 </button>
-
-                <div className="flex-1 min-h-0 flex flex-col">
-                  <div className="flex-1 min-h-0 bg-black rounded-lg overflow-hidden shadow-2xl">
-                    <iframe
-                      src={`${selectedVideo}?autoplay=1&rel=0`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    ></iframe>
-                  </div>
-
-                  <div className="mt-4 bg-[#262626] rounded-lg p-6 max-h-[200px] overflow-y-auto">
-                    <h3 className="text-xl font-semibold text-white mb-2">
-                      {videos.find((v) => v.url === selectedVideo)?.title}
-                    </h3>
-                    <p className="text-gray-300 whitespace-pre-line">
-                      {videos.find((v) => v.url === selectedVideo)?.description}
-                    </p>
-                  </div>
-                </div>
+                <iframe
+                  src={selectedVideo}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Scroll to Top Button */}
-        <AnimatePresence>
-          {showScrollTop && (
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              onClick={scrollToTop}
-              className="fixed bottom-8 right-8 bg-[#FFD700] text-black p-4 rounded-full shadow-lg hover:bg-[#FFE657] transition-colors z-40"
-            >
-              <FaArrowUp />
-            </motion.button>
-          )}
-        </AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 bg-[#FFD700] text-black p-4 rounded-full shadow-lg hover:bg-[#FFE657] transition-colors z-50"
+          >
+            <FaArrowUp size={24} />
+          </motion.button>
+        )}
       </div>
     </>
   );

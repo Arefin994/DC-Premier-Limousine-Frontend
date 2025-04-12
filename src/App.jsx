@@ -11,12 +11,13 @@ import AirportServices from './pages/Airports';
 import Blog from './pages/Blog';
 import Videos from './pages/Videos';
 import NotFound from './pages/NotFound';
+import Admin from './pages/Admin';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HelmetProvider } from 'react-helmet-async';
 import LoadingState from './components/LoadingState';
 
-// ScrollToTop component
+// ScrollToTop component - Ensures page scrolls to top on route change
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -27,7 +28,7 @@ function ScrollToTop() {
   return null;
 }
 
-// Replaced generic divs with semantic tags
+// Main App component with routing configuration
 function App() {
   return (
     <HelmetProvider>
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/fleet" element={<Fleet />} />
                 <Route path="/airports" element={<AirportServices />} />
                 <Route path="/videos" element={<Videos />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
