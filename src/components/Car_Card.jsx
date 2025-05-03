@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag = false }) => {
+const Car_Card = ({
+  name,
+  imageUrl,
+  altText, 
+  passengerCapacity,
+  laggageCapacity,
+  hourlyRate,
+  flag = false,
+}) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -14,14 +22,14 @@ const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag = false
 
   return (
     <div
-      className={`group w-[320px] h-[320px] bg-[#1A1A1A] rounded-3xl relative shadow-xl shadow-black/50
+      className={`group w-[320px] h-[320px] rounded-3xl relative shadow-xl shadow-black/50 bg-[#2c2c2c]
       transition-all duration-500 ease-in-out hover:rounded-tl-[56px] cursor-pointer
-      ${isClicked ? 'rounded-tl-[56px]' : ''}`}
+      ${isClicked ? "rounded-tl-[56px]" : ""}`}
       onClick={handleClick}
       role="button"
       tabIndex={0}
       aria-label={`View details for ${name}`}
-      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+      onKeyDown={(e) => e.key === "Enter" && handleClick()}
     >
       {/* Profile Image */}
       <div
@@ -30,7 +38,11 @@ const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag = false
         ease-in-out delay-200 group-hover:w-[100px] group-hover:h-[100px] group-hover:aspect-square 
         group-hover:top-[10px] group-hover:left-[10px] group-hover:rounded-full group-hover:z-30 
         group-hover:border-[8px] group-hover:border-[#FFD700] group-hover:shadow-[0_5px_5px_0_rgba(26,26,26,0.19)]
-        ${isClicked ? '!w-[100px] !h-[100px] !aspect-square !top-[10px] !left-[10px] !rounded-full !z-30 !border-[8px] !border-[#FFD700] !shadow-[0_5px_5px_0_rgba(26,26,26,0.19)]' : ''}`}
+        ${
+          isClicked
+            ? "!w-[100px] !h-[100px] !aspect-square !top-[10px] !left-[10px] !rounded-full !z-30 !border-[8px] !border-[#FFD700] !shadow-[0_5px_5px_0_rgba(26,26,26,0.19)]"
+            : ""
+        }`}
       >
         {imageUrl ? (
           <img
@@ -50,23 +62,24 @@ const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag = false
         shadow-[inset_0_5px_5px_0_rgba(26,26,26,0.19)] overflow-hidden border-4 border-[#626262]
         transition-all duration-500 [transition-timing-function:cubic-bezier(0.645,0.045,0.355,1)] 
         group-hover:top-[20%] top-[75%]
-        ${isClicked ? '!top-[20%]' : ''}`}
+        ${isClicked ? "!top-[20%]" : ""}`}
       >
         <div
           className={`absolute bottom-0 left-6 right-6 transition-all duration-500 ease-in-out 
           group-hover:h-4/6 h-[65px]
-          ${isClicked ? '!h-4/6' : ''}`}
+          ${isClicked ? "!h-4/6" : ""}`}
         >
           <span className="block text-lg text-[#FFD700] font-bold">{name}</span>
           <div
             className={`max-h-[calc(100%-50px)] overflow-y-auto custom-scrollbar mt-2 
             transition-opacity duration-500 group-hover:opacity-100 opacity-0
-            ${isClicked ? '!opacity-100' : ''}`}
+            ${isClicked ? "!opacity-100" : ""}`}
           >
+            <p className="text-sm text-[#AAAAAA] mb-2">{altText}</p>
             <span className="block text-sm text-[#AAAAAA]">
-              Passenger Capacity: {passenger}
+              Passenger Capacity: {passengerCapacity}
               <br />
-              Luggage Capacity: {luggage}
+              Luggage Capacity: {laggageCapacity}
               <br />
               Hourly Rate: {hourlyRate}
             </span>
@@ -92,10 +105,13 @@ const Car_Card = ({ name, imageUrl, passenger, luggage, hourlyRate, flag = false
 Car_Card.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  passenger: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  luggage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  altText:PropTypes.string.isRequired ,
+  passengerCapacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  laggageCapacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   hourlyRate: PropTypes.string.isRequired,
-  flag: PropTypes.bool
+  flag: PropTypes.bool,
 };
 
 export default Car_Card;

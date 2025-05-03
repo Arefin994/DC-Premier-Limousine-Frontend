@@ -1,105 +1,79 @@
-import React from 'react';
-import { FaPlane, FaBriefcase, FaGlassCheers, FaGraduationCap, FaCalendarAlt, FaCarAlt, FaStar, FaPhoneAlt, FaCheck } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-import Card from '../components/Card';
-import { Link } from 'react-router-dom';
-import CancellationPolicy from '../components/cancellation';
-import { Helmet } from 'react-helmet-async';
+import React, { useState, useEffect } from "react";
+import {
+  FaCalendarAlt,
+  FaStar,
+  FaPhoneAlt,
+  FaCheck,
+} from "react-icons/fa";
+import { motion } from "framer-motion";
+import Card from "../components/Card";
+import { Link } from "react-router-dom";
+import CancellationPolicy from "../components/cancellation";
+import { Helmet } from "react-helmet-async";
+import axios from "axios";
 
-const ServiceData = [
-  {
-    name: "Airport Transfers",
-    description:
-      "Enjoy seamless airport transport with our luxury fleet. Professional chauffeurs track flights in real-time for timely pickups. Relax with spacious luggage capacity, plush leather seats, and complimentary bottled water.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1616620418290-81a162f05e5d?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    features: [
-      "Flight tracking for delayed arrivals",
-      "Meet & greet with name signage",
-      "Disinfectant wipes & sanitizer provided",
-      "24/7 availability including holidays",
-    ],
-    to: "/services",
-  },
-  {
-    name: "Corporate Travel",
-    description:
-      "Impress clients with our discreet, professional chauffeur service. Our executive vehicles feature privacy partitions, onboard Wi-Fi, and power outlets for productivity. Perfect for client meetings, corporate events, or daily commutes in the DC metro area.",
-    imageUrl:
-      "https://plus.unsplash.com/premium_photo-1661397005386-5f35bae9f35a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    features: [
-      "Black luxury sedans & SUVs",
-      "Documented safety records",
-      "Same-day booking available",
-      "Monthly billing options",
-    ],
-    to: "/services",
-  },
-  {
-    name: "Wedding Transportation",
-    description:
-      "Make your wedding day flawless with our bridal fleet. From classic stretch limousines to vintage Rolls Royce options, we provide red carpet service, complimentary decorations, and experienced chauffeurs who understand wedding timelines.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80",
-    features: [
-      "Bridal party coordination",
-      "Champagne toast service",
-      "Emergency wedding day kit",
-      "Flexible hourly packages",
-    ],
-    to: "/services",
-  },
-  {
-    name: "Special Event Limousines",
-    description:
-      "Elevate your prom, anniversary, or milestone celebration with our luxury party buses and limousines. Featuring premium sound systems, LED lighting, and spacious interiors designed for group celebrations in the DC area.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-    features: [
-      "Non-alcoholic beverage bar",
-      "Social media photo lighting",
-      "Overnight packages available",
-      "20+ passenger options",
-    ],
-    to: "/services",
-  },
-  {
-    name: "Wine Country Tours",
-    description:
-      "Discover Virginia's finest vineyards in luxury. Our wine tour packages include custom itineraries, knowledgeable chauffeurs, and climate-controlled vehicles perfect for transporting your purchases safely back to DC.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-    features: [
-      "Vineyard recommendations",
-      "Cooler storage for purchases",
-      "Flexible pickup locations",
-      "Private group tours",
-    ],
-    to: "/services",
-  },
-  {
-    name: "Nightlife Transportation",
-    description:
-      "Enjoy DC's vibrant nightlife safely with our premium party transportation. Our chauffeurs know all the best routes to avoid traffic and get your group to clubs, concerts, and events on time with VIP treatment.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-    features: [
-      "Late-night availability",
-      "Designated driver service",
-      "Phone chargers provided",
-      "Multiple stop itineraries",
-    ],
-    to: "/services",
-  },
-];
+const API_BASE_URL = "/api";
 
 const Services = () => {
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    handleServices();
+  }, []);
+
+  const handleServices = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/services`);
+      console.log(response.data);
+      setServices(response.data);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+      setError("Failed to fetch services");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
+        <motion.div
+          animate={{ 
+            rotate: 360,
+            transition: { 
+              duration: 1.5, 
+              repeat: Infinity, 
+              ease: "linear" 
+            } 
+          }}
+          className="w-12 h-12 border-4 border-[#FFD700] border-t-transparent rounded-full"
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-red-500 text-xl">{error}</div>
+      </div>
+    );
+  }
+
   return (
     <>
       <Helmet>
         <title>Our Services - DC Premier Limo</title>
-        <meta name="description" content="Explore our premium limo services, including airport transfers, corporate travel, wedding transportation, and more." />
-        <meta name="keywords" content="limo services, airport transfers, corporate travel, wedding transportation, luxury limo" />
+        <meta
+          name="description"
+          content="Explore our premium limo services, including airport transfers, corporate travel, wedding transportation, and more."
+        />
+        <meta
+          name="keywords"
+          content="limo services, airport transfers, corporate travel, wedding transportation, luxury limo"
+        />
       </Helmet>
       <main className="bg-[#1A1A1A]">
         <header className="relative h-[100vh] overflow-hidden">
@@ -110,7 +84,8 @@ const Services = () => {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundAttachment: "fixed",
@@ -149,7 +124,7 @@ const Services = () => {
         </header>
 
         <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-          <motion.h2 
+          <motion.h2
             className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -158,8 +133,18 @@ const Services = () => {
           >
             Our Services
           </motion.h2>
+          {/* <div>
+            <h1>Our Services</h1>
+            {services.map((service, index) => (
+              <div key={index}>
+                <h3>{service.name}</h3>
+                <p>{service.description}</p>
+              </div>
+            ))}
+          </div> */}
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {ServiceData.map((service, index) => (
+            {services.map((service, index) => (
               <motion.article
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -188,7 +173,8 @@ const Services = () => {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundAttachment: "fixed",
@@ -197,7 +183,7 @@ const Services = () => {
           />
           <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
             <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-              <motion.h2 
+              <motion.h2
                 className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -215,9 +201,9 @@ const Services = () => {
                   { text: "Luxury Well-Maintained Vehicles" },
                   { text: "Meet & Greet Service Available" },
                   { text: "Punctual & Reliable Service" },
-                  { text: "Easy Online Booking" }
+                  { text: "Easy Online Booking" },
                 ].map((benefit, index) => (
-                  <motion.div 
+                  <motion.div
                     key={index}
                     className="flex items-start bg-[#1A1A1A] bg-opacity-80 p-4 rounded-lg text-xl"
                     initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
@@ -234,7 +220,7 @@ const Services = () => {
           </div>
         </section>
 
-        <CancellationPolicy/>
+        <CancellationPolicy />
 
         {/* Testimonials */}
         <section className="relative h-[100vh] overflow-hidden">
@@ -245,7 +231,8 @@ const Services = () => {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundAttachment: "fixed",
@@ -254,7 +241,7 @@ const Services = () => {
           />
           <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.h2 
+              <motion.h2
                 className="text-3xl font-bold text-center mb-12 text-[#FFD700]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -266,22 +253,25 @@ const Services = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
                   {
-                    quote: "The airport pickup was flawless. The driver was waiting when we landed and helped with all our luggage.",
+                    quote:
+                      "The airport pickup was flawless. The driver was waiting when we landed and helped with all our luggage.",
                     author: "Michael T.",
-                    rating: 5
+                    rating: 5,
                   },
                   {
-                    quote: "Perfect service for our wedding day. The limo arrived on time and was beautifully decorated.",
+                    quote:
+                      "Perfect service for our wedding day. The limo arrived on time and was beautifully decorated.",
                     author: "Sarah K.",
-                    rating: 5
+                    rating: 5,
                   },
                   {
-                    quote: "Corporate clients were impressed with our transportation. Will definitely use again for business events.",
+                    quote:
+                      "Corporate clients were impressed with our transportation. Will definitely use again for business events.",
                     author: "James L.",
-                    rating: 5
-                  }
+                    rating: 5,
+                  },
                 ].map((testimonial, index) => (
-                  <motion.article 
+                  <motion.article
                     key={index}
                     className="bg-[#1A1A1A]/80 p-6 rounded-lg border border-[#626262]"
                     initial={{ opacity: 0, y: 20 }}
@@ -294,8 +284,12 @@ const Services = () => {
                         <FaStar key={i} className="text-[#FFD700]" />
                       ))}
                     </div>
-                    <p className="text-[#AAAAAA] italic mb-4">"{testimonial.quote}"</p>
-                    <p className="font-semibold text-[#FFD700]">- {testimonial.author}</p>
+                    <p className="text-[#AAAAAA] italic mb-4">
+                      "{testimonial.quote}"
+                    </p>
+                    <p className="font-semibold text-[#FFD700]">
+                      - {testimonial.author}
+                    </p>
                   </motion.article>
                 ))}
               </div>
@@ -306,7 +300,7 @@ const Services = () => {
         {/* CTA Section */}
         <section className="bg-[#FFD700] py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold mb-6 text-black"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -315,7 +309,7 @@ const Services = () => {
             >
               Ready to Experience Luxury Transportation?
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-xl mb-8 max-w-3xl mx-auto text-black"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -326,7 +320,7 @@ const Services = () => {
             </motion.p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/reservation">
-                <motion.button 
+                <motion.button
                   className="bg-black hover:bg-[#1A1A1A] text-[#FFD700] font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -334,13 +328,13 @@ const Services = () => {
                   <FaCalendarAlt className="mr-2" /> Book Online
                 </motion.button>
               </Link>
-              <a href="tel:5551234567">
-                <motion.button 
+              <a href="tel:+1 (202) 630-2686">
+                <motion.button
                   className="bg-black hover:bg-[#1A1A1A] text-[#FFD700] font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FaPhoneAlt className="mr-2" /> (555) 123-4567
+                  <FaPhoneAlt className="mr-2" /> +1 (202) 630-2686
                 </motion.button>
               </a>
             </div>
@@ -352,3 +346,91 @@ const Services = () => {
 };
 
 export default Services;
+
+
+// const ServiceData = [
+//   {
+//     name: "Airport Transfers",
+//     description:
+//       "Enjoy seamless airport transport with our luxury fleet. Professional chauffeurs track flights in real-time for timely pickups. Relax with spacious luggage capacity, plush leather seats, and complimentary bottled water.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1616620418290-81a162f05e5d?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+//     features: [
+//       "Flight tracking for delayed arrivals",
+//       "Meet & greet with name signage",
+//       "Disinfectant wipes & sanitizer provided",
+//       "24/7 availability including holidays",
+//     ],
+//     to: "/services",
+//   },
+//   {
+//     name: "Corporate Travel",
+//     description:
+//       "Impress clients with our discreet, professional chauffeur service. Our executive vehicles feature privacy partitions, onboard Wi-Fi, and power outlets for productivity. Perfect for client meetings, corporate events, or daily commutes in the DC metro area.",
+//     imageUrl:
+//       "https://plus.unsplash.com/premium_photo-1661397005386-5f35bae9f35a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+//     features: [
+//       "Black luxury sedans & SUVs",
+//       "Documented safety records",
+//       "Same-day booking available",
+//       "Monthly billing options",
+//     ],
+//     to: "/services",
+//   },
+//   {
+//     name: "Wedding Transportation",
+//     description:
+//       "Make your wedding day flawless with our bridal fleet. From classic stretch limousines to vintage Rolls Royce options, we provide red carpet service, complimentary decorations, and experienced chauffeurs who understand wedding timelines.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80",
+//     features: [
+//       "Bridal party coordination",
+//       "Champagne toast service",
+//       "Emergency wedding day kit",
+//       "Flexible hourly packages",
+//     ],
+//     to: "/services",
+//   },
+//   {
+//     name: "Special Event Limousines",
+//     description:
+//       "Elevate your prom, anniversary, or milestone celebration with our luxury party buses and limousines. Featuring premium sound systems, LED lighting, and spacious interiors designed for group celebrations in the DC area.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
+//     features: [
+//       "Non-alcoholic beverage bar",
+//       "Social media photo lighting",
+//       "Overnight packages available",
+//       "20+ passenger options",
+//     ],
+//     to: "/services",
+//   },
+//   {
+//     name: "Wine Country Tours",
+//     description:
+//       "Discover Virginia's finest vineyards in luxury. Our wine tour packages include custom itineraries, knowledgeable chauffeurs, and climate-controlled vehicles perfect for transporting your purchases safely back to DC.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
+//     features: [
+//       "Vineyard recommendations",
+//       "Cooler storage for purchases",
+//       "Flexible pickup locations",
+//       "Private group tours",
+//     ],
+//     to: "/services",
+//   },
+//   {
+//     name: "Nightlife Transportation",
+//     description:
+//       "Enjoy DC's vibrant nightlife safely with our premium party transportation. Our chauffeurs know all the best routes to avoid traffic and get your group to clubs, concerts, and events on time with VIP treatment.",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
+//     features: [
+//       "Late-night availability",
+//       "Designated driver service",
+//       "Phone chargers provided",
+//       "Multiple stop itineraries",
+//     ],
+//     to: "/services",
+//   },
+// ];

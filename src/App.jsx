@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from './components/Navbar';
 import Footer from './components/footer';
 import Home from './pages/Home';
-import About from './pages/About';
 import Services from './pages/Services';
 import Reservation from './pages/Reservation';
 import Fleet from './pages/Fleet';
@@ -53,14 +52,13 @@ function App() {
               />
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
                 <Route path="/reservation" element={<Reservation />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/fleet" element={<Fleet />} />
                 <Route path="/airports" element={<AirportServices />} />
                 <Route path="/videos" element={<Videos />} />
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/*" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
