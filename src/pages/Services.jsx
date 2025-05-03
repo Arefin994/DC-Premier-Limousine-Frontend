@@ -43,7 +43,7 @@ const Services = () => {
           animate={{ 
             rotate: 360,
             transition: { 
-              duration: 1.5, 
+              duration: 0.8, 
               repeat: Infinity, 
               ease: "linear" 
             } 
@@ -133,16 +133,6 @@ const Services = () => {
           >
             Our Services
           </motion.h2>
-          {/* <div>
-            <h1>Our Services</h1>
-            {services.map((service, index) => (
-              <div key={index}>
-                <h3>{service.name}</h3>
-                <p>{service.description}</p>
-              </div>
-            ))}
-          </div> */}
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.article

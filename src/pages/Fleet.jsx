@@ -41,7 +41,7 @@ const Fleet = () => {
           animate={{ 
             rotate: 360,
             transition: { 
-              duration: 1.5, 
+              duration: 0.8, 
               repeat: Infinity, 
               ease: "linear" 
             } 
@@ -124,7 +124,7 @@ const Fleet = () => {
           variants={container}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {fleet.map((card, index) => (
+          {Array.isArray(fleet) && fleet.map((card, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
