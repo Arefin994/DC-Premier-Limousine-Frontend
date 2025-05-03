@@ -19,7 +19,7 @@ const Fleet = () => {
 
   const fetchFleet = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/fleets`);
+      const response = await axios.get(`${API_BASE_URL}/api/fleets`);
       console.log(response.data);
       setFleet(response.data);
     } catch (err) {
