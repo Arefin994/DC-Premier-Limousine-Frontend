@@ -19,7 +19,7 @@ const Fleet = () => {
 
   const fetchFleet = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/fleets`);
+      const response = await axios.get(`https://dc-premier-limousine-backend-api.vercel.app/api/fleets`);
       console.log(response.data);
       setFleet(response.data);
     } catch (err) {
