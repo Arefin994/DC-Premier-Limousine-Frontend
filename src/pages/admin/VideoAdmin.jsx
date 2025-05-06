@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "/api";
-
 const getHeaders = (token) => ({
   Authorization: `Bearer ${token}`,
   "Content-Type": "application/json",
@@ -22,9 +20,12 @@ const VideoAdmin = ({ token, onSuccess }) => {
 
   const fetchVideos = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/videos`, {
-        headers: getHeaders(token),
-      });
+      const response = await axios.get(
+        `https://dc-premier-limousine-backend-api.vercel.app/api/videos`,
+        {
+          headers: getHeaders(token),
+        }
+      );
       console.log("Fetched videos:", response.data);
       setVideos(response.data);
     } catch (err) {
@@ -49,7 +50,7 @@ const VideoAdmin = ({ token, onSuccess }) => {
       const embedUrl = convertToEmbedUrl(videoForm.url);
       console.log("Adding video with data:", { url: embedUrl });
       const response = await axios.post(
-        `${API_BASE_URL}/videos`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/videos`,
         { url: embedUrl },
         { headers: getHeaders(token) }
       );
@@ -75,7 +76,7 @@ const VideoAdmin = ({ token, onSuccess }) => {
       const embedUrl = convertToEmbedUrl(videoForm.url);
       console.log("Updating video with data:", { url: embedUrl });
       const response = await axios.put(
-        `${API_BASE_URL}/videos/${videos[editingVideo]._id}`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/videos/${videos[editingVideo]._id}`,
         { url: embedUrl },
         { headers: getHeaders(token) }
       );
@@ -94,7 +95,7 @@ const VideoAdmin = ({ token, onSuccess }) => {
     try {
       console.log("Deleting video:", videos[index]._id);
       const response = await axios.delete(
-        `${API_BASE_URL}/videos/${videos[index]._id}`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/videos/${videos[index]._id}`,
         {
           headers: getHeaders(token),
         }

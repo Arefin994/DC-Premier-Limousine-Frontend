@@ -81,7 +81,7 @@ const Car_Card = ({
               <br />
               Luggage Capacity: {laggageCapacity}
               <br />
-              Hourly Rate: {hourlyRate}
+              Hourly Rate: {hourlyRate}$
             </span>
           </div>
           {flag && (

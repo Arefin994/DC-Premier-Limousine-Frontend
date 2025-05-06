@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "/api";
-
 const getHeaders = (token) => ({
   Authorization: `Bearer ${token}`,
   "Content-Type": "application/json",
@@ -25,9 +23,12 @@ const ServiceAdmin = ({ token, onSuccess }) => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/services`, {
-        headers: getHeaders(token),
-      });
+      const response = await axios.get(
+        `https://dc-premier-limousine-backend-api.vercel.app/api/services`,
+        {
+          headers: getHeaders(token),
+        }
+      );
       setServices(response.data);
     } catch (err) {
       setError("Failed to fetch services");
@@ -42,7 +43,7 @@ const ServiceAdmin = ({ token, onSuccess }) => {
         .filter((feature) => feature !== "");
 
       await axios.post(
-        `${API_BASE_URL}/services`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/services`,
         {
           ...serviceForm,
           features: filteredFeatures,
@@ -86,7 +87,7 @@ const ServiceAdmin = ({ token, onSuccess }) => {
       });
 
       const response = await axios.put(
-        `${API_BASE_URL}/services/${services[editingService]._id}`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/services/${services[editingService]._id}`,
         {
           name: serviceForm.name,
           imageUrl: serviceForm.imageUrl,
@@ -117,9 +118,12 @@ const ServiceAdmin = ({ token, onSuccess }) => {
 
   const handleDeleteService = async (index) => {
     try {
-      await axios.delete(`${API_BASE_URL}/services/${services[index]._id}`, {
-        headers: getHeaders(token),
-      });
+      await axios.delete(
+        `https://dc-premier-limousine-backend-api.vercel.app/api/services/${services[index]._id}`,
+        {
+          headers: getHeaders(token),
+        }
+      );
       onSuccess("Service deleted successfully!");
       window.location.reload();
     } catch (err) {

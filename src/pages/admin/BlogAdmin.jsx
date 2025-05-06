@@ -27,9 +27,10 @@ const BlogAdmin = ({ token, onSuccess }) => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/blogs`, {
+      const response = await axios.get(`https://dc-premier-limousine-backend-api.vercel.app/api/blogs`,{
         headers: getHeaders(token),
       });
+      console.log(response.data);
       setBlogs(response.data);
     } catch (err) {
       setError("Failed to fetch blogs");
@@ -39,7 +40,7 @@ const BlogAdmin = ({ token, onSuccess }) => {
   const handleAddBlog = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API_BASE_URL}/blogs`, blogForm, {
+      await axios.post(`https://dc-premier-limousine-backend-api.vercel.app/api/blogs`, blogForm, {
         headers: getHeaders(token),
       });
       setBlogForm({
@@ -65,7 +66,7 @@ const BlogAdmin = ({ token, onSuccess }) => {
     e.preventDefault();
     try {
       await axios.put(
-        `${API_BASE_URL}/blogs/${blogs[editingBlog]._id}`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/blogs/${blogs[editingBlog]._id}`,
         blogForm,
         { headers: getHeaders(token) }
       );
@@ -85,7 +86,7 @@ const BlogAdmin = ({ token, onSuccess }) => {
 
   const handleDeleteBlog = async (index) => {
     try {
-      await axios.delete(`${API_BASE_URL}/blogs/${blogs[index]._id}`, {
+      await axios.delete(`https://dc-premier-limousine-backend-api.vercel.app/api/blogs/${blogs[index]._id}`, {
         headers: getHeaders(token),
       });
       onSuccess("Blog post deleted successfully!");

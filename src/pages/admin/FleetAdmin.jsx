@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "/api";
-
 const getHeaders = (token) => ({
   Authorization: `Bearer ${token}`,
   "Content-Type": "application/json",
@@ -27,9 +25,12 @@ const FleetAdmin = ({ token, onSuccess }) => {
 
   const fetchFleets = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/fleets`, {
-        headers: getHeaders(token),
-      });
+      const response = await axios.get(
+        `https://dc-premier-limousine-backend-api.vercel.app/api/fleets`,
+        {
+          headers: getHeaders(token),
+        }
+      );
       console.log("Fetched fleets:", response.data);
       setFleets(response.data);
     } catch (err) {
@@ -49,7 +50,7 @@ const FleetAdmin = ({ token, onSuccess }) => {
       });
 
       const response = await axios.post(
-        `${API_BASE_URL}/fleets`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/fleets`,
         {
           ...fleetForm,
           passengerCapacity: Number(fleetForm.passengerCapacity),
@@ -93,7 +94,7 @@ const FleetAdmin = ({ token, onSuccess }) => {
       });
 
       const response = await axios.put(
-        `${API_BASE_URL}/fleets/${fleets[editingFleet]._id}`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/fleets/${fleets[editingFleet]._id}`,
         {
           ...fleetForm,
           passengerCapacity: Number(fleetForm.passengerCapacity),
@@ -125,7 +126,7 @@ const FleetAdmin = ({ token, onSuccess }) => {
     try {
       console.log("Deleting fleet:", fleets[index]._id);
       const response = await axios.delete(
-        `${API_BASE_URL}/fleets/${fleets[index]._id}`,
+        `https://dc-premier-limousine-backend-api.vercel.app/api/fleets/${fleets[index]._id}`,
         {
           headers: getHeaders(token),
         }
