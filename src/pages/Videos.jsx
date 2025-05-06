@@ -1,31 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import {
-  FaPlay,
-  FaClock,
-  FaYoutube,
-  FaChevronRight,
-  FaTimes,
-  FaArrowUp,
-} from "react-icons/fa";
+import { FaPlay, FaChevronRight, FaTimes, FaArrowUp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const Videos = () => {
-  const youtubeLinks = [
-    "https://youtu.be/FzpjHINVsIs?si=Zty74gYr2VkiSSJG",
-    "https://youtu.be/Kp9LmSy8I9Q?si=gvJnRwSVOwa5ooj8",
-    "https://youtu.be/ani9dWmdW_w?si=5PPj2XWxGluConRB",
-    "https://youtu.be/PqvSJ4t_Bic?si=MVL9cLFWqtxTAc08",
-  ];
-
-  const categories = ["All", "Fleet", "Events", "Testimonials"];
-
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("All");
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [backgroundError, setBackgroundError] = useState(false);
+
+  // Helper function to extract YouTube ID from any URL format
+  const getYouTubeId = (url) => {
+    if (!url) return null;
+
+    // Standard YouTube links
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    if (match && match[2].length === 11) {
+      return match[2];
+    }
+
+    // Short youtu.be links
+    if (url.includes("youtu.be/")) {
+      return url.split("youtu.be/")[1].split(/[?&#]/)[0];
+    }
+
+    // Embed links
+    if (url.includes("youtube.com/embed/")) {
+      return url.split("youtube.com/embed/")[1].split(/[?&#]/)[0];
+    }
+
+    return null;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,56 +46,43 @@ const Videos = () => {
   }, []);
 
   useEffect(() => {
-    const fetchVideoDetails = async () => {
+    const fetchVideos = async () => {
       try {
-        const videoData = await Promise.all(
-          youtubeLinks.map(async (link) => {
-            const videoId = link.split("youtu.be/")[1].split("?")[0];
-            const apiUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+        const response = await axios.get(
+          `https://dc-premier-limousine-backend-api.vercel.app/api/videos`
+        );
 
-            const response = await fetch(apiUrl);
-            const data = await response.json();
+        const videoData = response.data
+          .map((video) => {
+            const videoId = getYouTubeId(video.url);
 
-            // Fetch video details from YouTube Data API
-            const detailsResponse = await fetch(
-              `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=YOUR_YOUTUBE_API_KEY`
-            );
-            const detailsData = await detailsResponse.json();
-            const description =
-              detailsData.items?.[0]?.snippet?.description ||
-              "Experience luxury transportation at its finest";
-
-            // Randomly assign a category for demo purposes
-            const randomCategory =
-              categories[
-                Math.floor(Math.random() * (categories.length - 1)) + 1
-              ];
+            if (!videoId) {
+              console.warn("Could not extract YouTube ID from URL:", video.url);
+              return null;
+            }
 
             return {
-              id: videoId,
-              title: data.title,
-              description: description,
+              id: video._id,
+              youtubeId: videoId,
+              title: `Luxury Limousine Service`,
+              description: "Experience our premium transportation service",
               thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-              duration: "N/A",
-              url: `https://www.youtube.com/embed/${videoId}`,
-              category: randomCategory,
+              embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1`,
+              createdAt: video.createdAt,
             };
           })
-        );
+          .filter(Boolean); // Remove any null entries
+
         setVideos(videoData);
       } catch (error) {
-        console.error("Error fetching video details:", error);
+        console.error("Error fetching videos:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchVideoDetails();
+    fetchVideos();
   }, []);
-
-  const filteredVideos = videos.filter(
-    (video) => activeCategory === "All" || video.category === activeCategory
-  );
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -104,79 +100,33 @@ const Videos = () => {
 
       <div className="bg-gradient-to-b from-[#1A1A1A] to-[#262626] text-[#AAAAAA] min-h-screen">
         {/* Hero Section */}
-        <div className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-black opacity-60 z-10" />
-            {!backgroundError ? (
-              <video
-                className="w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="https://images.unsplash.com/photo-1470847352555-49687d7bc7ec?q=80&w=2131&auto=format"
-                onError={() => setBackgroundError(true)}
-              >
-                <source
-                  src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=164&oauth2_token_id=57447761"
-                  type="video/mp4"
-                />
-              </video>
-            ) : (
-              <div 
-                className="w-full h-full bg-cover bg-center"
-                style={{
-                  backgroundImage: 'url("https://images.unsplash.com/photo-1470847352555-49687d7bc7ec?q=80&w=2131&auto=format")'
-                }}
-              />
-            )}
-          </div>
-          <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl font-bold text-white mb-6"
-            >
-              Video <span className="text-[#FFD700]">Gallery</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-200"
-            >
-              Experience the DC Premier Limousine difference
-            </motion.p>
-          </div>
-        </div>
-
-        {/* Sticky Category Filter */}
-        <div className="top-0 z-10 bg-[#1A1A1A] bg-opacity-95 backdrop-blur-md border-b border-[#333333] py-4 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 overflow-x-auto py-1 px-1 no-scrollbar">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-4 py-2 rounded-full transition-all duration-300 whitespace-nowrap text-sm sm:text-base sm:px-6 ${
-                    activeCategory === category
-                      ? "bg-[#FFD700] text-black font-semibold"
-                      : "bg-[#262626] text-[#AAAAAA] hover:bg-[#333333]"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="relative h-96 flex items-center justify-center overflow-hidden bg-slate-900 shadow-2xl border-b-2 border-[#FFD700]">
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-0" />
+          <div className="absolute inset-0 bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1702339955839-489ff9b5ce58')] opacity-50" />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="relative z-10 text-center px-6"
+          >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+              <span className="text-[#FFD700]">Premium</span> Video Gallery
+            </h1>
+            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
+              Witness the elegance of our luxury fleet in motion
+            </p>
+          </motion.div>
         </div>
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {loading ? (
             <div className="flex flex-col items-center justify-center min-h-[400px]">
-              <div className="w-16 h-16 border-4 border-[#FFD700] border-t-transparent rounded-full animate-spin mb-4"></div>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                className="w-16 h-16 border-4 border-[#FFD700] border-t-transparent rounded-full mb-4"
+              />
               <p className="text-[#FFD700]">Loading videos...</p>
             </div>
           ) : (
@@ -185,52 +135,50 @@ const Videos = () => {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               <AnimatePresence>
-                {filteredVideos.map((video) => (
+                {videos.map((video) => (
                   <motion.div
                     key={video.id}
                     layout
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    whileHover={{ y: -8 }}
-                    className="bg-[#262626] rounded-xl overflow-hidden shadow-xl border border-[#333333] transform transition-all duration-300 hover:shadow-2xl hover:border-[#FFD700]"
+                    whileHover={{
+                      y: -10,
+                      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="bg-[#1E1E1E] rounded-2xl overflow-hidden shadow-lg border border-[#3A3A3A] hover:border-[#FFD700] group relative"
+                    onClick={() => setSelectedVideo(video.embedUrl)}
                   >
-                    <div
-                      className="relative cursor-pointer group aspect-video"
-                      onClick={() => setSelectedVideo(video.url)}
-                    >
+                    <div className="relative aspect-video overflow-hidden">
                       <img
                         src={video.thumbnail}
                         alt={video.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        onError={(e) => {
-                          e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23262626'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='24' fill='%23AAAAAA'%3EVideo Thumbnail%3C/text%3E%3C/svg%3E";
-                        }}
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="bg-[#FFD700] text-black p-4 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <FaPlay className="text-xl" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-70" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-[#FFD700] text-black p-5 rounded-full transform scale-90 group-hover:scale-110 transition-all duration-300 shadow-xl">
+                          <FaPlay className="text-2xl" />
                         </div>
                       </div>
-                      <div className="absolute top-3 right-3 bg-[#FFD700] text-black px-3 py-1 rounded-full text-sm font-medium">
-                        {video.category}
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-xl font-bold text-white drop-shadow-lg">
+                          {video.title}
+                        </h3>
                       </div>
                     </div>
-
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold text-white mb-2 line-clamp-2">
-                        {video.title}
-                      </h3>
-                      <p className="text-gray-400 mb-4 line-clamp-2">
+                    <div className="p-6 bg-gradient-to-b from-[#2A2A2A] to-[#1E1E1E]">
+                      <p className="text-gray-300 mb-5 line-clamp-2">
                         {video.description}
                       </p>
-                      <button
-                        onClick={() => setSelectedVideo(video.url)}
-                        className="inline-flex items-center text-[#FFD700] hover:text-[#FFE657] group"
+                      <motion.button
+                        whileHover={{ x: 5, backgroundColor: "#FFE657" }}
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-[#FFD700] text-black font-medium px-5 py-2.5 rounded-lg flex items-center gap-2"
                       >
-                        Watch Video{" "}
-                        <FaChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                      </button>
+                        Watch Now <FaChevronRight />
+                      </motion.button>
                     </div>
                   </motion.div>
                 ))}
@@ -239,31 +187,30 @@ const Videos = () => {
           )}
         </div>
 
-        {/* Video Modal */}
+        {/* Enhanced Video Modal */}
         <AnimatePresence>
           {selectedVideo && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             >
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="relative w-full max-w-6xl h-[90vh] flex flex-col"
+                initial={{ scale: 0.95, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.95, y: 20 }}
+                className="relative w-full max-w-6xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border border-[#3A3A3A]"
               >
                 <button
                   onClick={() => setSelectedVideo(null)}
-                  className="absolute -top-12 right-0 text-white hover:text-[#FFD700] transition-colors z-10"
+                  className="absolute top-4 right-4 bg-black/70 text-white hover:text-[#FFD700] p-2 rounded-full z-10 transition-colors"
                 >
-                  <FaTimes size={24} />
+                  <FaTimes size={20} />
                 </button>
                 <iframe
                   src={selectedVideo}
                   className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </motion.div>
@@ -274,13 +221,13 @@ const Videos = () => {
         {/* Scroll to Top Button */}
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 bg-[#FFD700] text-black p-4 rounded-full shadow-lg hover:bg-[#FFE657] transition-colors z-50"
+            whileHover={{ scale: 1.1, backgroundColor: "#FFE657" }}
+            whileTap={{ scale: 0.9 }}
+            className="fixed bottom-8 right-8 bg-[#FFD700] text-black p-4 rounded-full shadow-xl hover:shadow-2xl transition-all z-50 flex items-center justify-center"
+            style={{ boxShadow: "0 0 20px rgba(255, 215, 0, 0.5)" }}
           >
-            <FaArrowUp size={24} />
+            <FaArrowUp size={20} />
           </motion.button>
         )}
       </div>
@@ -289,3 +236,15 @@ const Videos = () => {
 };
 
 export default Videos;
+
+{
+  /* <iframe width="560" height="315" src="https://www.youtube.com/embed/FzpjHINVsIs?si=jEU2dZTefM1cmzhB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Kp9LmSy8I9Q?si=7eCa3uoB-NxcYxUb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ani9dWmdW_w?si=gWqzVIBzA6z3wacn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PqvSJ4t_Bic?si=gGSFEOGreyN-SFs7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+https://www.youtube.com/embed/FzpjHINVsIs?si=jEU2dZTefM1cmzhB
+https://www.youtube.com/embed/Kp9LmSy8I9Q?si=7eCa3uoB-NxcYxUb
+https://www.youtube.com/embed/ani9dWmdW_w?si=gWqzVIBzA6z3wacn
+https://www.youtube.com/embed/PqvSJ4t_Bic?si=gGSFEOGreyN-SFs7 */
+}

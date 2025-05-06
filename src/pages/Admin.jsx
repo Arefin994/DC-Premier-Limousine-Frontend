@@ -6,8 +6,6 @@ import FleetAdmin from './admin/FleetAdmin';
 import ServiceAdmin from './admin/ServiceAdmin';
 import VideoAdmin from './admin/VideoAdmin';
 
-const API_BASE_URL = '/api';
-
 // Helper function to get headers with token
 const getHeaders = (token) => ({
   'Authorization': `Bearer ${token}`,
@@ -61,7 +59,7 @@ const Admin = () => {
     setError('');
     
     try {
-      const response = await axios.post(`${API_BASE_URL}/admins/login`, {
+      const response = await axios.post(`https://dc-premier-limousine-backend-api.vercel.app/api/admins/login`, {
         username,
         password
       });

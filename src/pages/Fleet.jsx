@@ -10,8 +10,6 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
 
-const API_BASE_URL = "/api";
-
 const Fleet = () => {
   const [fleet, setFleet] = useState([]);
   const [loading, setLoading] = useState(true);

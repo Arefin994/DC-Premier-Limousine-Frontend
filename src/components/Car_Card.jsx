@@ -105,12 +105,12 @@ const Car_Card = ({
 Car_Card.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  altText:PropTypes.string.isRequired ,
+  altText:PropTypes.string ,
   passengerCapacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   laggageCapacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
-  hourlyRate: PropTypes.string.isRequired,
+  hourlyRate: PropTypes.number.isRequired,
   flag: PropTypes.bool,
 };
 

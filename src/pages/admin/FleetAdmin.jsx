@@ -317,45 +317,70 @@ const FleetAdmin = ({ token, onSuccess }) => {
         <h2 className="text-xl font-semibold text-[#FFD700] mb-4">
           Current Fleet
         </h2>
-        <div className="space-y-4">
+        <div className="space-y-6">
           {Array.isArray(fleets) &&
             fleets.map((fleet, index) => (
               <div
                 key={fleet._id}
-                className="bg-[#1A1A1A] p-4 rounded-lg border border-[#626262]"
+                className="flex flex-col sm:flex-row gap-4 bg-[#1A1A1A] p-4 rounded-lg border border-[#626262] hover:bg-[#262626] transition-colors"
               >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-lg font-medium text-[#FFD700]">
-                      {fleet.name}
-                    </h3>
-                    <p className="text-[#AAAAAA] mt-1">
-                      Alt Text: {fleet.altText}
-                    </p>
-                    <p className="text-[#AAAAAA] mt-1">
-                      Capacity: {fleet.passengerCapacity} passengers
-                    </p>
-                    <p className="text-[#AAAAAA] mt-1">
-                      Luggage: {fleet.laggageCapacity}
-                    </p>
-                    <p className="text-[#AAAAAA] mt-1">
-                      Rate: ${fleet.hourlyRate}/hour
-                    </p>
+                {/* Fleet Image */}
+                <div className="w-full sm:w-1/3 lg:w-1/4 relative">
+                  <div className="relative pt-[56.25%] rounded-lg overflow-hidden bg-[#262626]">
+                    <img
+                      src={fleet.imageUrl}
+                      alt={fleet.altText || fleet.name}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMyNjI2MjYiLz48dGV4dCB4PSIwLjUiIHk9IjAuNSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMC4yIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iI0FBQUFBQSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+";
+                      }}
+                    />
+                    <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1 rounded">
+                      ${fleet.hourlyRate}/hr
+                    </div>
                   </div>
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEditFleet(index)}
-                      className="text-[#FFD700] hover:text-[#FFE657]"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteFleet(index)}
-                      className="text-red-500 hover:text-red-400"
-                    >
-                      Delete
-                    </button>
+                </div>
+
+                {/* Fleet Details */}
+                <div className="flex-1 flex flex-col">
+                  <h3 className="text-[#FFD700] font-medium text-lg mb-2">
+                    {fleet.name}
+                  </h3>
+
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div>
+                      <p className="text-[#AAAAAA]">Capacity:</p>
+                      <p className="text-white">
+                        {fleet.passengerCapacity} passengers
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[#AAAAAA]">Luggage:</p>
+                      <p className="text-white">{fleet.laggageCapacity}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-[#AAAAAA]">Description:</p>
+                      <p className="text-white line-clamp-2">{fleet.altText}</p>
+                    </div>
                   </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex sm:flex-col justify-end gap-2 sm:w-20">
+                  <button
+                    onClick={() => handleEditFleet(index)}
+                    className="text-[#FFD700] hover:text-[#FFE657] text-sm px-3 py-1 sm:px-2 sm:py-1 rounded bg-[#262626]"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteFleet(index)}
+                    className="text-red-500 hover:text-red-400 text-sm px-3 py-1 sm:px-2 sm:py-1 rounded bg-[#262626]"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}

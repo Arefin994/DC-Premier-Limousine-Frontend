@@ -251,38 +251,68 @@ const BlogAdmin = ({ token, onSuccess }) => {
         <h2 className="text-xl font-semibold text-[#FFD700] mb-4">
           Current Blog Posts
         </h2>
-        <div className="space-y-4">
-          {Array.isArray(blogs) &&
-            blogs.map((blog, index) => (
-              <div
-                key={blog._id}
-                className="bg-[#1A1A1A] p-4 rounded-lg border border-[#626262]"
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-lg font-medium text-[#FFD700]">
-                      {blog.title}
-                    </h3>
-                    <p className="text-[#AAAAAA] mt-2">{blog.content}</p>
-                  </div>
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEditBlog(index)}
-                      className="text-[#FFD700] hover:text-[#FFE657]"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteBlog(index)}
-                      className="text-red-500 hover:text-red-400"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+        <div className="space-y-6">
+  {Array.isArray(blogs) && blogs.map((blog, index) => (
+    <div key={blog._id} className="flex flex-col sm:flex-row gap-4 bg-[#1A1A1A] p-4 rounded-lg border border-[#626262] hover:bg-[#262626] transition-colors">
+      {/* Blog Thumbnail - Using imageUrl from your data */}
+      <div className="w-full sm:w-1/3 lg:w-1/4 relative">
+        <div className="relative pt-[56.25%] rounded-lg overflow-hidden bg-[#262626]">
+          <img 
+            src={blog.imageUrl} 
+            alt={blog.altText || blog.title}
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            onError={(e) => {
+              e.target.onerror = null; 
+              e.target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMyNjI2MjYiLz48dGV4dCB4PSIwLjUiIHk9IjAuNSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMC4yIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iI0FBQUFBQSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+'
+            }}
+          />
+          <div className="absolute bottom-1 right-1 bg-black bg-opacity-80 text-white text-xs px-1 rounded">
+            {blog.category}
+          </div>
         </div>
+      </div>
+
+      {/* Blog Content - Using only provided fields */}
+      <div className="flex-1 flex flex-col">
+        <h3 className="text-[#FFD700] font-medium text-lg mb-1 line-clamp-2">
+          {blog.title}
+        </h3>
+        <p className="text-gray-400 text-sm mb-2">
+          {blog.date}
+        </p>
+        <p className="text-[#AAAAAA] text-sm line-clamp-3 mb-4">
+          {blog.content}
+        </p>
+        
+        {/* Static Admin Info (since author isn't in your data) */}
+        <div className="flex items-center mt-auto">
+          <div className="w-8 h-8 rounded-full bg-[#626262] mr-2 flex items-center justify-center text-xs text-white">
+            A
+          </div>
+          <span className="text-gray-300 text-sm">
+            Admin
+          </span>
+        </div>
+      </div>
+
+      {/* Action Buttons (unchanged from your original) */}
+      <div className="flex sm:flex-col justify-end gap-2 sm:w-20">
+        <button
+          onClick={() => handleEditBlog(index)}
+          className="text-[#FFD700] hover:text-[#FFE657] text-sm px-3 py-1 sm:px-2 sm:py-1 rounded bg-[#262626]"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => handleDeleteBlog(index)}
+          className="text-red-500 hover:text-red-400 text-sm px-3 py-1 sm:px-2 sm:py-1 rounded bg-[#262626]"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
       </div>
     </div>
   );

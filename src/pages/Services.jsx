@@ -12,8 +12,6 @@ import CancellationPolicy from "../components/cancellation";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
 
-const API_BASE_URL = "/api";
-
 const Services = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +23,7 @@ const Services = () => {
 
   const handleServices = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/services`);
+      const response = await axios.get(`https://dc-premier-limousine-backend-api.vercel.app/api/services`);
       console.log(response.data);
       setServices(response.data);
     } catch (error) {

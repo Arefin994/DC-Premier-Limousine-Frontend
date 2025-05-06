@@ -299,40 +299,72 @@ const ServiceAdmin = ({ token, onSuccess }) => {
         <h2 className="text-xl font-semibold text-[#FFD700] mb-4">
           Current Services
         </h2>
-        <div className="space-y-4">
+        <div className="space-y-6">
           {Array.isArray(services) &&
             services.map((service, index) => (
               <div
                 key={service._id}
-                className="bg-[#1A1A1A] p-4 rounded-lg border border-[#626262]"
+                className="flex flex-col sm:flex-row gap-4 bg-[#1A1A1A] p-4 rounded-lg border border-[#626262] hover:bg-[#262626] transition-colors"
               >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-lg font-medium text-[#FFD700]">
-                      {service.name}
-                    </h3>
-                    <p className="text-[#AAAAAA] mt-1">{service.description}</p>
-                    <ul className="mt-2 list-disc list-inside text-[#AAAAAA]">
+                {/* Service Image */}
+                <div className="w-full sm:w-1/3 lg:w-1/4 relative">
+                  <div className="relative pt-[56.25%] rounded-lg overflow-hidden bg-[#262626]">
+                    <img
+                      src={service.imageUrl}
+                      alt={service.name}
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMyNjI2MjYiLz48dGV4dCB4PSIwLjUiIHk9IjAuNSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMC4yIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgZmlsbD0iI0FBQUFBQSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+";
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Service Content */}
+                <div className="flex-1 flex flex-col">
+                  <h3 className="text-[#FFD700] font-medium text-lg mb-1">
+                    {service.name}
+                  </h3>
+                  <p className="text-[#AAAAAA] text-sm mb-2 line-clamp-2">
+                    {service.description}
+                  </p>
+
+                  {/* Features List */}
+                  <div className="mt-2">
+                    <h4 className="text-[#AAAAAA] text-sm font-semibold mb-1">
+                      Features:
+                    </h4>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
                       {Array.isArray(service.features) &&
                         service.features.map((feature, i) => (
-                          <li key={i}>{feature}</li>
+                          <li
+                            key={i}
+                            className="text-[#AAAAAA] text-sm flex items-start"
+                          >
+                            <span className="text-[#FFD700] mr-1">•</span>
+                            <span className="line-clamp-1">{feature}</span>
+                          </li>
                         ))}
                     </ul>
                   </div>
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEditService(index)}
-                      className="text-[#FFD700] hover:text-[#FFE657]"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteService(index)}
-                      className="text-red-500 hover:text-red-400"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex sm:flex-col justify-end gap-2 sm:w-20">
+                  <button
+                    onClick={() => handleEditService(index)}
+                    className="text-[#FFD700] hover:text-[#FFE657] text-sm px-3 py-1 sm:px-2 sm:py-1 rounded bg-[#262626]"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteService(index)}
+                    className="text-red-500 hover:text-red-400 text-sm px-3 py-1 sm:px-2 sm:py-1 rounded bg-[#262626]"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}

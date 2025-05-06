@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import {
   Calendar,
   ArrowRight,
-  Facebook,
-  Instagram,
-  Twitter,
-  Mail,
   X
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
-
-const API_BASE_URL = '/api';
 
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -23,7 +17,7 @@ const Blog = () => {
 
   const fetchBlogPosts = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/blogs`);
+      const response = await axios.get(`https://dc-premier-limousine-backend-api.vercel.app/api/blogs`);
       setBlogPosts(response.data);
     } catch (err) {
       console.error('Error fetching blog posts:', err);

@@ -14,7 +14,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://dc-premier-limousine-backend-api.vercel.app',
+        target: 'https://dc-premier-limousine-backend-api.vercel.app',//https://dc-premier-limousine-arefin994s-projects.vercel.app
         changeOrigin: true,
         secure: false
       }
