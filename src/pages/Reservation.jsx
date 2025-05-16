@@ -95,7 +95,7 @@ const Reservation = () => {
         "service_9l3ongf",
         "template_180gc2h",
         emailParams,
-        "bBkI6WMy-n-x6BP_L"
+        "bs2ff7w-W2Ibt0u7y"
       )
       .then(
         (response) => {

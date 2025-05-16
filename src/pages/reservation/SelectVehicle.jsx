@@ -52,7 +52,7 @@ const SelectVehicle = ({ formData, setFormData, fleet, nextStep, prevStep }) => 
           </div>
         ))}
     </div>
-    <div className="mt-10 flex justify-between">
+<div className="mt-10 flex justify-between">
       <button
         type="button"
         onClick={prevStep}
@@ -64,7 +64,7 @@ const SelectVehicle = ({ formData, setFormData, fleet, nextStep, prevStep }) => 
         type="button"
         onClick={nextStep}
         disabled={!formData.vehicleType}
-        className={`$ {
+        className={`${
           !formData.vehicleType
             ? "bg-[#626262] cursor-not-allowed"
             : "bg-[#FFD700] hover:bg-[#FFE657]"
@@ -73,6 +73,7 @@ const SelectVehicle = ({ formData, setFormData, fleet, nextStep, prevStep }) => 
         Next: Your Information <FaChevronRight className="ml-2" />
       </button>
     </div>
+
   </div>
 );
 
