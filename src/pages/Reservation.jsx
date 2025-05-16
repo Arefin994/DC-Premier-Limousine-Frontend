@@ -13,6 +13,9 @@ import {
 import { motion } from "framer-motion";
 import axios from "axios";
 import emailjs from "emailjs-com";
+import TripInfo from "./reservation/TripInfo";
+import SelectVehicle from "./reservation/SelectVehicle";
+import YourInfo from "./reservation/YourInfo";
 
 const Reservation = () => {
   const [formData, setFormData] = useState({
@@ -41,7 +44,6 @@ const Reservation = () => {
       const response = await axios.get(
         `https://dc-premier-limousine-backend-api.vercel.app/api/fleets`
       );
-      console.log(response.data);
       setFleet(response.data);
     } catch (err) {
       console.error("Error fetching fleet:", err);
@@ -268,406 +270,30 @@ const Reservation = () => {
             onSubmit={handleSubmit}
             className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-[#626262] shadow-2xl"
           >
-            {/* Step 1: Trip Details */}
             {currentStep === 1 && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-                className="p-6 sm:p-8"
-              >
-                <div className="flex items-center mb-8">
-                  <div className="w-10 h-10 rounded-full bg-[#FFD700] text-[#1A1A1A] flex items-center justify-center mr-4">
-                    <FaMapMarkerAlt />
-                  </div>
-                  <h2 className="text-2xl font-semibold text-[#FFD700]">
-                    Trip Information
-                  </h2>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                      Service Type
-                    </label>
-                    <select
-                      name="serviceType"
-                      value={formData.serviceType}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                      required
-                    >
-                      <option value="" className="text-[#AAAAAA]">
-                        Select a service
-                      </option>
-                      {serviceOptions.map((service, index) => (
-                        <option
-                          key={index}
-                          value={service.toLowerCase().replace(" ", "-")}
-                          className="bg-[#1A1A1A]"
-                        >
-                          {service}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                        Pickup Location
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
-                          <FaMapMarkerAlt />
-                        </div>
-                        <input
-                          type="text"
-                          name="pickupLocation"
-                          value={formData.pickupLocation}
-                          onChange={handleChange}
-                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                          placeholder="Address, airport, hotel..."
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                        Destination
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
-                          <FaMapMarkerAlt />
-                        </div>
-                        <input
-                          type="text"
-                          name="destination"
-                          value={formData.destination}
-                          onChange={handleChange}
-                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                          placeholder="Address, airport, hotel..."
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                        Date
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
-                          <FaCalendarAlt />
-                        </div>
-                        <input
-                          type="date"
-                          name="date"
-                          value={formData.date}
-                          onChange={handleChange}
-                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                        Time
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
-                          <FaClock />
-                        </div>
-                        <input
-                          type="time"
-                          name="time"
-                          value={formData.time}
-                          onChange={handleChange}
-                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                      Number of Passengers
-                    </label>
-                    <input
-                      type="number"
-                      name="passengers"
-                      min="1"
-                      max="20"
-                      value={formData.passengers}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-10 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={nextStep}
-                    className="bg-[#FFD700] hover:bg-[#FFE657] text-[#1A1A1A] font-medium py-3 px-8 rounded-lg transition-colors duration-300 flex items-center"
-                  >
-                    Next: Select Vehicle <FaChevronRight className="ml-2" />
-                  </button>
-                </div>
-              </motion.div>
+              <TripInfo
+                formData={formData}
+                setFormData={setFormData}
+                nextStep={nextStep}
+                serviceOptions={serviceOptions}
+              />
             )}
-
-            {/* Step 2: Vehicle Selection */}
             {currentStep === 2 && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-                className="p-6 sm:p-8"
-              >
-                <div className="flex items-center mb-8">
-                  <div className="w-10 h-10 rounded-full bg-[#FFD700] text-[#1A1A1A] flex items-center justify-center mr-4">
-                    <FaCar />
-                  </div>
-                  <h2 className="text-2xl font-semibold text-[#FFD700]">
-                    Select Your Vehicle
-                  </h2>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {Array.isArray(fleet) &&
-                    fleet.map((vehicle) => (
-                      <div
-                        key={vehicle._id}
-                        className={`relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${
-                          formData.vehicleType === vehicle.name.toLowerCase().replace(/\s+/g, "-")
-                            ? "ring-2 ring-[#FFD700]"
-                            : "hover:ring-1 hover:ring-[#626262]"
-                        }`}
-                        onClick={() =>
-                          setFormData((prev) => ({
-                            ...prev,
-                            vehicleType: vehicle.name.toLowerCase().replace(/\s+/g, "-"),
-                          }))
-                        }
-                      >
-                        <div className="h-48 overflow-hidden">
-                          <img
-                            src={vehicle.imageUrl}
-                            alt={vehicle.name}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h3 className="font-bold text-white text-lg">
-                            {vehicle.name}
-                          </h3>
-                          <div className="flex justify-between items-center mt-2">
-                            <span className="text-sm text-white">
-                            Passenger: {vehicle.passengerCapacity} 
-                            </span>
-                            <span className="text-sm text-white">
-                            Luggage: {vehicle.laggageCapacity} 
-                            </span>
-                            <span className="font-bold text-[#FFD700]">
-                              ${vehicle.hourlyRate}/hour
-                            </span>
-                          </div>
-                        </div>
-                        {formData.vehicleType === vehicle.name.toLowerCase().replace(/\s+/g, "-") && (
-                          <div className="absolute top-4 right-4 w-6 h-6 bg-[#FFD700] rounded-full flex items-center justify-center">
-                            <svg
-                              className="w-4 h-4 text-[#1A1A1A]"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="3"
-                                d="M5 13l4 4L19 7"
-                              ></path>
-                            </svg>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                </div>
-
-                <div className="mt-10 flex justify-between">
-                  <button
-                    type="button"
-                    onClick={prevStep}
-                    className="bg-[#262626] hover:bg-[#333333] text-[#AAAAAA] font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center"
-                  >
-                    <FaChevronLeft className="mr-2" /> Back
-                  </button>
-                  <button
-                    type="button"
-                    onClick={nextStep}
-                    disabled={!formData.vehicleType}
-                    className={`${
-                      !formData.vehicleType
-                        ? "bg-[#626262] cursor-not-allowed"
-                        : "bg-[#FFD700] hover:bg-[#FFE657]"
-                    } text-[#1A1A1A] font-medium py-3 px-8 rounded-lg transition-colors duration-300 flex items-center`}
-                  >
-                    Next: Your Information <FaChevronRight className="ml-2" />
-                  </button>
-                </div>
-              </motion.div>
+              <SelectVehicle
+                formData={formData}
+                setFormData={setFormData}
+                fleet={fleet}
+                nextStep={nextStep}
+                prevStep={prevStep}
+              />
             )}
-
-            {/* Step 3: Contact Information */}
             {currentStep === 3 && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-                className="p-6 sm:p-8"
-              >
-                <div className="flex items-center mb-8">
-                  <div className="w-10 h-10 rounded-full bg-[#FFD700] text-[#1A1A1A] flex items-center justify-center mr-4">
-                    <FaUser />
-                  </div>
-                  <h2 className="text-2xl font-semibold text-[#FFD700]">
-                    Your Information
-                  </h2>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                        Full Name
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
-                          <FaUser />
-                        </div>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                          placeholder="John Doe"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                        Phone Number
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
-                          <FaPhoneAlt />
-                        </div>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                          placeholder="(123) 456-7890"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                      Email Address
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#626262]">
-                        <FaEnvelope />
-                      </div>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="pl-10 w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                        placeholder="your@email.com"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-[#AAAAAA] mb-2">
-                      Special Requests (Optional)
-                    </label>
-                    <textarea
-                      name="specialRequests"
-                      value={formData.specialRequests}
-                      onChange={handleChange}
-                      rows="3"
-                      className="w-full px-4 py-3 bg-[#262626] border border-[#626262] rounded-lg focus:ring-2 focus:ring-[#FFD700] focus:border-[#FFD700] text-white"
-                      placeholder="Child seats, wheelchair accessibility, etc."
-                    ></textarea>
-                  </div>
-                </div>
-
-                <div className="mt-10 flex justify-between">
-                  <button
-                    type="button"
-                    onClick={prevStep}
-                    className="bg-[#262626] hover:bg-[#333333] text-[#AAAAAA] font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center"
-                  >
-                    <FaChevronLeft className="mr-2" /> Back
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`${
-                      isSubmitting
-                        ? "bg-[#FFD700]/80"
-                        : "bg-[#FFD700] hover:bg-[#FFE657]"
-                    } text-[#1A1A1A] font-medium py-3 px-8 rounded-lg transition-colors duration-300 flex items-center`}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg
-                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-[#1A1A1A]"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                        </svg>
-                        Processing...
-                      </>
-                    ) : (
-                      "Complete Reservation"
-                    )}
-                  </button>
-                </div>
-              </motion.div>
+              <YourInfo
+                formData={formData}
+                handleChange={handleChange}
+                prevStep={prevStep}
+                isSubmitting={isSubmitting}
+              />
             )}
           </form>
         )}
