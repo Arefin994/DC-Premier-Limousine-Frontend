@@ -73,8 +73,8 @@ const Navbar = () => {
   return (
     <>
       <Helmet>
-        <title>DC Premier Limousine - Luxury Transportation</title>
-        <meta name="description" content="Experience luxury transportation services in Washington DC with DC Premier Limousine." />
+        <title>QUANTICO CAR SERVICE</title>
+        <meta name="description" content="Experience luxury transportation services in Washington DC with QUANTICO CAR SERVICE." />
       </Helmet>
       <nav
         className={`flex-wrap bg-black fixed w-full z-50 top-0 start-0 transition-all duration-300 ease-in-out ${getNavbarClasses()}`}
@@ -87,8 +87,8 @@ const Navbar = () => {
             to="/"
             className="flex items-center space-x-2 flex-shrink-0 mr-4 hover:opacity-80 active:opacity-60 transition-opacity"
           >
-            <span className="text-xl font-bold text-[#FFD700] z-50">
-              DC Premier Limousine
+            <span className="text-2xl font-bold text-[#FFD700] z-50">
+              QUANTICO CAR SERVICE
             </span>
           </Link>
 

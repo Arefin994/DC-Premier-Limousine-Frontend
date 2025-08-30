@@ -194,7 +194,7 @@ const VideoAdmin = ({ token, onSuccess }) => {
                 {/* Video Info */}
                 <div className="flex-1 flex flex-col">
                   <h3 className="text-white font-medium text-lg mb-1 line-clamp-2">
-                    {video.title || "Brought to you by DC Premier Limousine"}
+                    {video.title || "Brought to you by Quantico Car Rental Services"}
                   </h3>
                   <p className="text-gray-400 text-sm line-clamp-2 mb-4">
                     {video.description || "No description available"}

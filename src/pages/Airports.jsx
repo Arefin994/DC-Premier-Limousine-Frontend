@@ -17,10 +17,10 @@ const AirportServices = () => {
   return (
     <>
       <Helmet>
-        <title>Airport Services - DC Premier Limo</title>
+        <title>Airport Services - Quantico Car Rental Services</title>
         <meta
           name="description"
-          content="Enjoy seamless airport transportation with DC Premier Limo. Real-time flight tracking and VIP meet & greet services."
+          content="Enjoy seamless airport transportation with Quantico Car Rental Services. Real-time flight tracking and VIP meet & greet services."
         />
         <meta
           name="keywords"
@@ -39,8 +39,7 @@ const AirportServices = () => {
               Premium Airport Transportation
             </h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl">
-              Luxury chauffeur services to all major airports in Washington DC,
-              Maryland, and Virginia
+              Luxury ride services to all major airports in Virginia, Washington DC and Maryland. 
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/reservation">
@@ -58,7 +57,7 @@ const AirportServices = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FaPhoneAlt className="mr-2" /> +1 (202) 630-2686
+                  <FaPhoneAlt className="mr-2" /> +1(703) 344 3234
                 </motion.button>
               </a>
             </div>
@@ -124,7 +123,7 @@ const AirportServices = () => {
         <div className="bg-[#262626] py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center mb-12 text-[#FFD700]">
-              Why Choose Premier International Travel
+              Why Choose Quantico Car Rental Services
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center ">
               {[

@@ -5,6 +5,7 @@ import BlogAdmin from './admin/BlogAdmin';
 import FleetAdmin from './admin/FleetAdmin';
 import ServiceAdmin from './admin/ServiceAdmin';
 import VideoAdmin from './admin/VideoAdmin';
+import ReservationAdmin from './admin/ReservationAdmin';
 
 // Helper function to get headers with token
 const getHeaders = (token) => ({
@@ -141,6 +142,12 @@ const Admin = () => {
       >
         Videos
       </Link>
+      <Link
+        to="/admin/reservations"
+        className={`py-2 px-4 font-medium ${location.pathname === '/admin/reservations' ? 'text-[#FFD700] border-b-2 border-[#FFD700]' : 'text-[#AAAAAA] hover:text-[#FFE657]'}`}
+      >
+        Reservations
+      </Link>
     </div>
   );
 
@@ -215,6 +222,7 @@ const Admin = () => {
             <Route path="/services" element={<ServiceAdmin token={token} onSuccess={handleSuccess} />} />
             <Route path="/blog" element={<BlogAdmin token={token} onSuccess={handleSuccess} />} />
             <Route path="/videos" element={<VideoAdmin token={token} onSuccess={handleSuccess} />} />
+            <Route path="/reservations" element={<ReservationAdmin token={token} onSuccess={handleSuccess} />} />
           </Routes>
         </>
       )}

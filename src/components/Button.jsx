@@ -6,8 +6,8 @@ const CustomButton = ({ href, text, icon }) => {
   return (
     <>
       <Helmet>
-        <title>{text} - DC Premier Limousine</title>
-        <meta name="description" content={`Explore ${text} with DC Premier Limousine.`} />
+        <title>{text} - Quantico Car Rental Services</title>
+        <meta name="description" content={`Explore ${text} with Quantico Car Rental Services.`} />
       </Helmet>
       <motion.a
         href={href}

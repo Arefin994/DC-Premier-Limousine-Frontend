@@ -15,10 +15,10 @@ const Footer = () => {
   return (
     <>
       <Helmet>
-        <title>Contact DC Premier Limousine</title>
+        <title>QUANTICO CAR SERVICE</title>
         <meta
           name="description"
-          content="Get in touch with DC Premier Limousine for luxury transportation services in Washington DC."
+          content="Get in touch with QUANTICO CAR SERVICE for luxury transportation services in Washington DC."
         />
       </Helmet>
       <footer
@@ -30,10 +30,10 @@ const Footer = () => {
             {/* Company Info */}
             <div>
               <div className="text-[#FFD700] flex items-center space-x-2 mb-4">
-                <span className="text-xl font-bold">DC Premier Limousine</span>
+                <span className="text-xl font-bold">QUANTICO CAR SERVICE</span>
               </div>
               <p className="text-gray-400 mb-4">
-                Your premier luxury transportation service in Washington DC.
+                Your premier luxury transportation service in Virginia and Washington DC.
                 Experience elegance, comfort, and reliability with our fleet of
                 premium vehicles and professional chauffeurs.
               </p>
@@ -155,16 +155,16 @@ const Footer = () => {
                 <li className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 text-[#FFE657] mt-0.5" />
                   <span className="text-gray-400">
-                    K street NW, Washington DC, USA
+                    Triangle VA-22172
                   </span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <Phone className="h-5 w-5 text-[#FFE657]" />
-                  <span className="text-gray-400">+1 (202) 630-2686</span>
+                  <span className="text-gray-400">+1(703) 344 3234</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-[#FFE657]" />
-                  <span className="text-gray-400">Dcpremierlimo@gmail.com</span>
+                  <span className="text-gray-400">quanticocarservice@gmail.com</span>
                 </li>
               </ul>
             </div>
@@ -172,7 +172,7 @@ const Footer = () => {
 
           <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-400">
             <p>
-              &copy; {new Date().getFullYear()} DC Premier Limousine. All rights
+              &copy; {new Date().getFullYear()} Quantico Car Rental Services. All rights
               reserved.
             </p>
           </div>

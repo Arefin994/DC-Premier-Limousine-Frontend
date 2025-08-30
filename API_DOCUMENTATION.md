@@ -1,4 +1,4 @@
-# Limo Backend API Documentation
+# Quantico Car Rental Services Backend API Documentation
 
 ## Base URL
 ```
@@ -442,6 +442,172 @@ Authorization: Bearer <token>
 Response (200):
 {
     "message": "Fleet deleted successfully"
+}
+```
+
+## Reservation API
+
+### Create Reservation
+```http
+POST /api/reservations
+Content-Type: application/json
+
+Request Body:
+{
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "phone": "string",
+    "passengers": "number",
+    "pickupAddress": "string",
+    "pickupLat": "number (optional)",
+    "pickupLon": "number (optional)",
+    "destinationAddress": "string",
+    "destinationLat": "number (optional)",
+    "destinationLon": "number (optional)",
+    "date": "string (YYYY-MM-DD)",
+    "time": "string (HH:MM)",
+    "status": "string (pending/confirmed/cancelled/completed)"
+}
+
+Response (201):
+{
+    "message": "Reservation created successfully",
+    "reservation": {
+        "_id": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "email": "string",
+        "phone": "string",
+        "passengers": "number",
+        "pickupAddress": "string",
+        "pickupLat": "number",
+        "pickupLon": "number",
+        "destinationAddress": "string",
+        "destinationLat": "number",
+        "destinationLon": "number",
+        "date": "string",
+        "time": "string",
+        "status": "string",
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+}
+```
+
+### Get All Reservations
+```http
+GET /api/reservations
+Authorization: Bearer <token>
+
+Response (200):
+[
+    {
+        "_id": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "email": "string",
+        "phone": "string",
+        "passengers": "number",
+        "pickupAddress": "string",
+        "pickupLat": "number",
+        "pickupLon": "number",
+        "destinationAddress": "string",
+        "destinationLat": "number",
+        "destinationLon": "number",
+        "date": "string",
+        "time": "string",
+        "status": "string",
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+]
+```
+
+### Get Single Reservation
+```http
+GET /api/reservations/:id
+Authorization: Bearer <token>
+
+Response (200):
+{
+    "_id": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "phone": "string",
+    "passengers": "number",
+    "pickupAddress": "string",
+    "pickupLat": "number",
+    "pickupLon": "number",
+    "destinationAddress": "string",
+    "destinationLat": "number",
+    "destinationLon": "number",
+    "date": "string",
+    "time": "string",
+    "status": "string",
+    "createdAt": "date",
+    "updatedAt": "date"
+}
+```
+
+### Update Reservation
+```http
+PUT /api/reservations/:id
+Authorization: Bearer <token>
+Content-Type: application/json
+
+Request Body:
+{
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "phone": "string",
+    "passengers": "number",
+    "pickupAddress": "string",
+    "pickupLat": "number (optional)",
+    "pickupLon": "number (optional)",
+    "destinationAddress": "string",
+    "destinationLat": "number (optional)",
+    "destinationLon": "number (optional)",
+    "date": "string (YYYY-MM-DD)",
+    "time": "string (HH:MM)",
+    "status": "string (pending/confirmed/cancelled/completed)"
+}
+
+Response (200):
+{
+    "message": "Reservation updated successfully",
+    "reservation": {
+        "_id": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "email": "string",
+        "phone": "string",
+        "passengers": "number",
+        "pickupAddress": "string",
+        "pickupLat": "number",
+        "pickupLon": "number",
+        "destinationAddress": "string",
+        "destinationLat": "number",
+        "destinationLon": "number",
+        "date": "string",
+        "time": "string",
+        "status": "string",
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+}
+```
+
+### Delete Reservation
+```http
+DELETE /api/reservations/:id
+Authorization: Bearer <token>
+
+Response (200):
+{
+    "message": "Reservation deleted successfully"
 }
 ```
 

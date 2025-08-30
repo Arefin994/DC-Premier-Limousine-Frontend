@@ -63,10 +63,10 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>Our Services - DC Premier Limo</title>
+        <title>Our Services - Quantico Car Rental Services</title>
         <meta
           name="description"
-          content="Explore our premium limo services, including airport transfers, corporate travel, wedding transportation, and more."
+          content="Explore our premium ride services in Virginia, Washington DC and Meryland"
         />
         <meta
           name="keywords"
@@ -178,11 +178,11 @@ const Services = () => {
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                Why Choose DC Premier Limousine?
+                Why Choose QUANTICO CAR SERVICE?
               </motion.h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                 {[
-                  { text: "Professional Licensed Chauffeurs" },
+                  { text: "Professional Driver, Chauffeurs" },
                   { text: "24/7 Customer Support" },
                   { text: "Flight Tracking for Airport Pickups" },
                   { text: "Competitive Pricing with No Hidden Fees" },
@@ -322,7 +322,7 @@ const Services = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FaPhoneAlt className="mr-2" /> +1 (202) 630-2686
+                  <FaPhoneAlt className="mr-2" /> +1(703) 344 3234
                 </motion.button>
               </a>
             </div>

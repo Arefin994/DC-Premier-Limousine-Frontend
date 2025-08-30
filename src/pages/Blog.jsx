@@ -116,7 +116,7 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Blog - DC Premier Limo</title>
+        <title>Blog - Quantico Car Rental Services</title>
         <meta name="description" content="Read our blog for expert guides, industry trends, and tips on luxury transportation in Washington D.C." />
         <meta name="keywords" content="limo blog, luxury transportation tips, DC limo insights" />
       </Helmet>

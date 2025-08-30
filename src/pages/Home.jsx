@@ -85,8 +85,8 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>DC Premier Limo - Luxury Transportation Services</title>
-        <meta name="description" content="Experience the finest in luxury transportation with DC Premier Limo. Book your ride for weddings, corporate events, airport transfers, and more." />
+              <title>Quantico Car Rental Services - Luxury Transportation Services</title>
+      <meta name="description" content="Experience the finest in luxury transportation with Quantico Car Rental Services. Book your ride for weddings, corporate events, airport transfers, and more." />
         <meta name="keywords" content="luxury limo, DC limo, airport transfers, wedding transportation, corporate travel" />
       </Helmet>
       <div className="relative min-h-screen">
@@ -108,8 +108,7 @@ const Home = () => {
                 Our Services
               </motion.h1>
               <motion.p className="text-lg text-white text-center mb-8 max-w-4xl mx-auto">
-                Experience the finest in luxury transportation with our premium
-                limo rental services in Washington, DC. Whether you're planning a
+                Experience the finest in luxury transportation with our Quantico car rental services in Virginia and Washington DC. Whether you're planning a
                 wedding, prom, corporate event, airport transfer, or a night out
                 on the town, we offer tailored solutions to make every occasion
                 unforgettable.

@@ -8,7 +8,7 @@ const Card = ({ name, description, imageUrl, features, to }) => {
   return (
     <>
       <Helmet>
-        <title>{name} - DC Premier Limousine</title>
+        <title>{name} - Quantico Car Rental Services</title>
         <meta name="description" content={`Explore ${name} with features like ${features?.join(", ")}.`} />
       </Helmet>
       <div

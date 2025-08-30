@@ -23,8 +23,8 @@ export const HeroSection = () => {
   return (
     <>
       <Helmet>
-        <title>DC Premier Limousine - Luxury Rides</title>
-        <meta name="description" content="Discover premium limousine services with DC Premier Limousine." />
+        <title>Quantico Car Rental Services - Luxury Rides</title>
+        <meta name="description" content="Discover premium limousine services with Quantico Car Rental Services." />
       </Helmet>
       <section className="relative h-screen w-full overflow-hidden">
         {/* Full-screen Carousel Background */}
